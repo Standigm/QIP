@@ -1,0 +1,74 @@
+# @package _global_
+
+defaults:
+  - /system: encoder_train.yaml
+  # override
+  # system config
+  - /system/encoder_config: "gps/medium.yaml"
+  - /system/task_head_configs: gps/task_head_default/TDC_cross/hia_hou.yaml
+  - /system/optimizer_configs: null
+  # train config
+  - override /trainer:
+      [
+        "default",
+        "accelerator/gpu",
+        "devices/2",
+        "max_steps/2k",
+        "accumulate_grad_batches/4",
+      ]
+
+  - override /callbacks: default.yaml
+  - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/hia_hou/v1_0_0]
+  - override /logger: ["csv", "wandb"]
+callbacks:
+  model_checkpoint:
+    monitor: val/BinaryAUROC/hia_hou.hia_hou
+    mode: max
+trainer:
+  devices: 1
+  max_epochs: 5
+  max_steps: -1
+  accumulate_grad_batches: 1
+  log_every_n_steps: 2
+  val_check_interval: 2
+datamodule:
+  batch_size: 16
+logger:
+  wandb_logger:
+    project: "ADMET_finetuning"
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+name: gps_PTNAME_finetuning_hia_hou
+seed: 8282
+system:
+  checkpoint_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT0/2023-07-24/12-25-37/checkpoints/checkpoint_000002820.ckpt
+  
+  frozen_modules:
+    - encoder
+
+
+  # encoder_config:
+  #   state_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT0/2023-07-24/12-25-37/checkpoints/checkpoint_000002820/encoder.pt
+
+
+
+  task_head_configs:
+    hia_hou:
+      weight: 1
+
+  optimizer_configs:
+    - optimizer:
+        _target_: torch.optim.AdamW
+        lr: 5e-7 # use very small lr with CosineAnnealingWarmUpRestartsWithDecay
+        # params: null # null or '' for all parameters
+        # modules: null # null or '' for all module parameters
+      lr_scheduler:
+        scheduler:
+          _target_: admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
+          T_0: 10_000
+          T_mult: null
+          eta_max: 2e-4
+          T_up: 0
+          gamma: 1.0
+        interval: "step"
+        frequency: 1

@@ -1,0 +1,16 @@
+defaults:
+  - multidata.yaml
+  - dataset_configs:
+      - "CYP/1A2/v2_0_0"
+      - "CYP/2C9/v2_0_0"
+      - "CYP/2C19/v2_0_0"
+      - "CYP/2D6/v2_0_0"
+      - "CYP/3A4/v2_0_0"
+      - "hERG/v2_2_0"
+      - "lipophilicity/v1_0_0"
+      - "MS/human/v2_0_0"
+      - "MS/mouse/v2_0_0"
+      - "permeability/v2_0_0"
+      - "solubility/pbs/v2_0_0"
+      - "nablaDFT/v1_0_0"
+      - "PubChemQC/v1_0_0"

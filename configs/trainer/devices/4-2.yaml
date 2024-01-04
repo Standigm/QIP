@@ -1,0 +1,4 @@
+# @package trainer
+
+devices: 4
+num_nodes: 2

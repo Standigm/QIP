@@ -1,0 +1,10 @@
+# @package system
+
+_target_: admet_prediction.systems.EncoderTrainSystem
+encoder_config: null
+task_head_configs: null
+optimizer_configs: null
+
+checkpoint_path: null
+trainable_modules: null
+frozen_modules: null

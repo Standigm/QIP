@@ -1,0 +1,19 @@
+# @package system.task_head_configs
+
+pubchemqc-b3lyp-pm6:
+  module:
+    _target_: admet_prediction.taskheads.gps.SANGraphHead
+    in_features: ${system.encoder_config.module.d_model}
+    out_features: 3 # number of targets
+    bias: True
+  loss:
+    _target_: torch.nn.SmoothL1Loss
+  weight: 1.0
+  metrics:
+    - _target_: torchmetrics.MeanAbsoluteError
+    - _target_: torchmetrics.PearsonCorrCoef
+      num_outputs: 3
+    - _target_: torchmetrics.SpearmanCorrCoef
+      num_outputs: 3
+  state_path: null
+  post_process: null

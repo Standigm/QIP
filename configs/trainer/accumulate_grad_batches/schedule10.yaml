@@ -1,0 +1,27 @@
+# @package __global__
+
+trainer:
+  accumulate_grad_batches: 1
+  val_check_interval: 64 # log_every_n_steps * accumulate_grad_batches, but less than the number of batches
+
+callbacks:
+  gradient_accumulation_scheduler:
+    _target_: lightning.pytorch.callbacks.GradientAccumulationScheduler
+    scheduling:
+      0: 1
+      10: 2
+      20: 4
+      30: 8
+      40: 16
+      50: 32
+      60: 64
+      70: 128
+      80: 256
+      90: 512
+      100: 1024
+      110: 2048
+      120: 4096
+      # 130: 8192
+      # 140: 16384
+      # 150: 32768
+

@@ -1,0 +1,15 @@
+# @package trainer
+
+defaults:
+  - default.yaml
+
+# effective batch_size: batch_size * devices * num_nodes * accumulate_grad_batches.
+devices: 8
+accelerator: gpu
+strategy: fsdp
+precision: 16
+
+# amp_backend: native
+max_epochs: null
+max_steps: 200_000
+accumulate_grad_batches: 2

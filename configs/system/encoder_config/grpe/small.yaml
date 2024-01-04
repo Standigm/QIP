@@ -1,0 +1,10 @@
+# @package system.encoder_config
+
+defaults:
+  - grpe/default.yaml
+
+module:
+  num_layer: 6
+  d_model: 768
+  nhead: 32
+  dim_feedforward: 1536

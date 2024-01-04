@@ -1,0 +1,15 @@
+# @package logger
+
+wandb_logger:
+  _target_: lightning.pytorch.loggers.wandb.WandbLogger
+  project: "ADMET_PROJECT"
+  settings: 
+    _target_: wandb.Settings
+    start_method: fork
+  name: "${mode}/${name}"
+  save_dir: "${work_dir}"
+  offline: False # set True to store all logs only locally
+  id: null # pass correct id to resume experiment!
+  # entity: ""  # set to name of your wandb team or just remove it
+  log_model: False
+  prefix: ""

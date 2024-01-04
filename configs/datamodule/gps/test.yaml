@@ -1,0 +1,54 @@
+# @package datamodule
+
+# config for integration test
+_target_: admet_prediction.datamodules.multi.MultiDataModule
+batch_size: 2 # default batch_size
+num_workers: 0
+collate_fn:
+  _target_: admet_prediction.datamodules.collaters.GraphDenseCollater
+  max_num_nodes: 256
+  offset: 128
+
+dataset_configs:
+  dataset1:
+    task_name: task1
+    dataset:
+      _target_: admet_prediction.datamodules.datasets.MoleculeGraphFromSMILESDataset
+      root: ${curr_dir}/data/dummies/task1
+      raw_file_names:
+        - test_smiles.csv
+        - val_smiles.csv
+        - train_smiles.csv
+        - train_added_smiles.csv
+      raw_label_file_names:
+        - test_labels.csv
+        - val_labels.csv
+        - train_labels.csv
+        - train_added_labels.csv
+      transform:
+        _target_: admet_prediction.datamodules.transforms.Compose
+        transforms:
+          - _target_: admet_prediction.datamodules.transforms.ShortestPathGenerator
+          - _target_: admet_prediction.datamodules.transforms.OneHotEdgeAttr
+    split_dict_name: "split_dict.pt" # cdd for test, anything else for train
+
+  dataset2:
+    task_name: task2
+    dataset:
+      _target_: admet_prediction.datamodules.datasets.MoleculeGraphFromSMILESDataset
+      root: ${curr_dir}/data/dummies/task2
+      raw_file_names:
+        - test_smiles.csv
+        - val_smiles.csv
+        - train_smiles.csv
+      raw_label_file_names:
+        - test_labels.csv
+        - val_labels.csv
+        - train_labels.csv
+      transform:
+        _target_: admet_prediction.datamodules.transforms.Compose
+        transforms:
+          - _target_: admet_prediction.datamodules.transforms.ShortestPathGenerator
+          - _target_: admet_prediction.datamodules.transforms.OneHotEdgeAttr
+    split_dict_name: "split_dict.pt" # cdd for test, anything else for train
+

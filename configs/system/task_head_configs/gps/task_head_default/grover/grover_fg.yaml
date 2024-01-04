@@ -1,0 +1,14 @@
+# @package system.task_head_configs
+
+grover-fg:
+  module:
+    _target_: admet_prediction.taskheads.grover.FunctionalGroupHead
+    dim_emb: ${system.encoder_config.module.d_model}
+    fg_size: 85 # number of targets
+    
+  loss:
+    _target_: torch.nn.BCEWithLogitsLoss
+    reduction: mean
+  weight: 1.0
+  state_path: null
+  

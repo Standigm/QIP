@@ -1,0 +1,60 @@
+# @package _global_
+
+defaults:
+  - /system: encoder_train.yaml
+  # override
+  # system config
+  - /system/encoder_config: "gps/medium.yaml"
+  - /system/task_head_configs: gps/MT0.yaml
+  - /system/optimizer_configs: null
+  # train config
+  - override /trainer:
+      [
+        "default",
+        "accelerator/gpu",
+        "devices/4",
+        "max_steps/10k",
+        "strategy/ddp",
+        "accumulate_grad_batches/4.yaml",
+        "precision/32"
+      ]
+  - override /callbacks: default.yaml
+  - override /datamodule: "gps/MT0-230629.yaml"
+  - override /logger: ["csv", "wandb"]
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+trainer:
+  max_epochs: 10
+  accumulate_grad_batches: 1
+  log_every_n_steps: 16
+  val_check_interval: 16
+datamodule:
+  batch_size: 24
+name: gps_FT_HD
+seed: 8252
+
+
+system:
+  checkpoint_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT_HD/2023-07-26/12-09-25/checkpoints/checkpoint_000003976.ckpt
+  # trainable_modules:
+  #   - task_heads
+  frozen_modules:
+    - encoder
+  optimizer_configs:
+    - optimizer:
+        _target_: torch.optim.AdamW
+        lr: 5e-7 # use very small lr with CosineAnnealingWarmUpRestartsWithDecay
+        # params: null # null or '' for all parameters
+        # modules: null # null or '' for all module parameters
+      lr_scheduler:
+        scheduler:
+          _target_: admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
+          T_0: 10_000
+          T_mult: null
+          eta_max: 1e-4
+          T_up: 0
+          gamma: 1.0
+        interval: "step"
+        frequency: 1

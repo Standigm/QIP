@@ -1,0 +1,53 @@
+# @package _global_
+
+defaults:
+  - /system: encoder_train.yaml
+  # override
+  # system config
+  - /system/encoder_config: "gps/medium.yaml"
+  - /system/task_head_configs: gps/PTR.yaml
+  - /system/optimizer_configs: null
+  # train config
+  - override /trainer:
+      [
+        "default",
+        "accelerator/gpu",
+        "devices/4",
+        "max_steps/4M",
+        "strategy/ddp",
+        "accumulate_grad_batches/schedule10.yaml",
+        "precision/32"
+      ]
+  - override /callbacks: default.yaml
+  - override /datamodule: "gps/PTR_only.yaml"
+  - override /logger: ["csv", "wandb"]
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+trainer:
+  #strategy: ddp_find_unused_parameters_true
+  log_every_n_steps: 256
+  val_check_interval: 256
+  max_epochs: 5
+datamodule:
+  batch_size: 512
+name: gps_PTR_only
+seed: 8282
+system:
+  optimizer_configs:
+    - optimizer:
+        _target_: torch.optim.AdamW
+        lr: 1e-5 # use very small lr with CosineAnnealingWarmUpRestartsWithDecay
+        # params: null # null or '' for all parameters
+        # modules: null # null or '' for all module parameters
+      lr_scheduler:
+        scheduler:
+          _target_: admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
+          T_0: 75_000
+          T_mult: null
+          eta_max: 2e-4
+          T_up: 7500
+          gamma: 1.0
+          warmup_base_lr: 0.0
+        interval: "step"
+        frequency: 1

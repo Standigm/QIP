@@ -1,0 +1,8 @@
+# @package datamodule
+
+defaults:
+  - gps/multidata_default.yaml
+    
+  - gps/dataset_configs:
+      - "grover/atom_v1_0_0"
+      - "grover/fg_v1_0_0"

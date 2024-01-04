@@ -1,0 +1,59 @@
+# @package _global_
+
+defaults:
+  - /system: encoder_train.yaml
+  # override
+  # system config
+  - /system/encoder_config: "gps/gnn.yaml"
+  - /system/task_head_configs: gps/MT0.yaml
+  - /system/optimizer_configs: paper_multi.yaml
+  # train config
+  - override /trainer:
+      [
+        "default",
+        "accelerator/gpu",
+        "devices/2",
+        "max_steps/10k",
+        "strategy/ddp",
+        "accumulate_grad_batches/4.yaml",
+        "precision/32"
+      ]
+  - override /callbacks: default.yaml
+  - override /datamodule: "gps/MT0-230629.yaml"
+  - override /logger: ["csv", "wandb"]
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+callbacks:
+  model_checkpoint:
+    monitor: val/score
+    mode: max
+trainer:
+  accumulate_grad_batches: 1
+  log_every_n_steps: 16
+  val_check_interval: 16
+  strategy:
+    find_unused_parameters: True
+
+datamodule:
+  batch_size: 24
+name: gps_MT0_gatv2
+seed: 8252
+# system:
+  # optimizer_configs:
+  #   - optimizer:
+  #       _target_: torch.optim.AdamW
+  #       lr: 1e-5 # use very small lr with CosineAnnealingWarmUpRestartsWithDecay
+  #       # params: null # null or '' for all parameters
+  #       # modules: null # null or '' for all module parameters
+  #     lr_scheduler:
+  #       scheduler:
+  #         _target_: admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
+  #         T_0: 10_000
+  #         T_mult: null
+  #         eta_max: 15e-5
+  #         T_up: 2000
+  #         gamma: 1.0
+  #         warmup_base_lr: 0.0
+  #       interval: "step"
+  #       frequency: 1

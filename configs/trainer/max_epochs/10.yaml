@@ -1,0 +1,4 @@
+# @package trainer
+
+max_steps: -1
+max_epochs: 10

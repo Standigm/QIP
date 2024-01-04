@@ -1,0 +1,17 @@
+# @package system.task_head_configs
+
+bbb_martins:
+  module:
+    _target_: admet_prediction.taskheads.gps.SANGraphHead
+    in_features: ${system.encoder_config.module.d_model}
+    out_features: 1
+    bias: True
+  loss:
+    _target_: admet_prediction.modules.losses.SigmoidFocalLoss
+    alpha: 0.24692118226600984
+  weight: 0.05
+  metrics:
+    - _target_: torchmetrics.classification.BinaryAUROC
+  state_path: null
+  post_process:
+    _target_: torch.nn.Sigmoid

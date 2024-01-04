@@ -1,0 +1,72 @@
+# @package system.task_head_configs
+
+defaults:
+  - "gps/task_head_default/TDC_default/caco2_wang.yaml"
+  - "gps/task_head_default/TDC_default/hia_hou.yaml"
+  - "gps/task_head_default/TDC_default/pgp_broccatelli.yaml"
+  - "gps/task_head_default/TDC_default/bioavailability_ma.yaml"
+  - "gps/task_head_default/TDC_default/lipophilicity_astrazeneca.yaml"
+  - "gps/task_head_default/TDC_default/solubility_aqsoldb.yaml"
+  - "gps/task_head_default/TDC_default/bbb_martins.yaml"
+  - "gps/task_head_default/TDC_default/ppbr_az.yaml"
+  - "gps/task_head_default/TDC_default/vdss_lombardo.yaml"
+  - "gps/task_head_default/TDC_default/cyp2d6_veith.yaml"
+  - "gps/task_head_default/TDC_default/cyp3a4_veith.yaml"
+  - "gps/task_head_default/TDC_default/cyp2c9_veith.yaml"
+  - "gps/task_head_default/TDC_default/cyp2d6_substrate_carbonmangels.yaml"
+  - "gps/task_head_default/TDC_default/cyp3a4_substrate_carbonmangels.yaml"
+  - "gps/task_head_default/TDC_default/cyp2c9_substrate_carbonmangels.yaml"
+  - "gps/task_head_default/TDC_default/half_life_obach.yaml"
+  - "gps/task_head_default/TDC_default/clearance_microsome_az.yaml"
+  - "gps/task_head_default/TDC_default/clearance_hepatocyte_az.yaml"
+  - "gps/task_head_default/TDC_default/herg.yaml"
+  - "gps/task_head_default/TDC_default/ames.yaml"
+  - "gps/task_head_default/TDC_default/dili.yaml"
+  - "gps/task_head_default/TDC_default/ld50_zhu.yaml"
+
+
+# Equal weight
+caco2_wang:
+  weight: 0.045
+hia_hou:
+  weight: 0.045
+pgp_broccatelli:
+  weight: 0.045
+bioavailability_ma:
+  weight: 0.045
+lipophilicity_astrazeneca:
+  weight: 0.045
+solubility_aqsoldb:
+  weight: 0.045
+bbb_martins:
+  weight: 0.045
+ppbr_az:
+  weight: 0.045
+vdss_lombardo:
+  weight: 0.045
+cyp2d6_veith:
+  weight: 0.045
+cyp3a4_veith:
+  weight: 0.045
+cyp2c9_veith:
+  weight: 0.045
+cyp2d6_substrate_carbonmangels:
+  weight: 0.045
+cyp3a4_substrate_carbonmangels:
+  weight: 0.045
+cyp2c9_substrate_carbonmangels:
+  weight: 0.045
+half_life_obach:
+  weight: 0.045
+clearance_microsome_az:
+  weight: 0.045
+clearance_hepatocyte_az:
+  weight: 0.045
+herg:
+  weight: 0.045
+ames:
+  weight: 0.045
+dili:
+  weight: 0.045
+ld50_zhu:
+  weight: 0.045

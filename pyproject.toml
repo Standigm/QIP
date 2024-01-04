@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Quantum Informed"
+version = "1.0.0"
+description = "QIP"
+readme = "README.md"
+authors = [
+    { name = "Jungwoo Kim", email = "jungwoo.kim@standigm.com" },
+    { name = "Woonggi Chang", email = "woonggi.chang@standigm.com" },
+    { name = "Hyunjun Ji", email = "hyunjun.ji@standigm.com" },
+    { name = "Insuk Joung", email = insuk.joung@standigm.com}
+]
+keywords = ["python"]
+requires-python = ">=3.8"
+dependencies = [
+]
+
+[project.optional-dependencies]
+dev = ["pylint", "black", "isort", "pre-commit", "pytest"]
+
+[tool.pylint.messages_control]
+max-line-length = 120
+disable = "too-many-arguments"
+extension-pkg-whitelist = "rdkit"
+
+[tool.pylint.format]
+good-names = ["i", "j", "k", "e", "ex", "Run", "_", "df", "oe", "G"]
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "-ra" # Explain all skipped, failed, errored tests

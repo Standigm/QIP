@@ -1,0 +1,12 @@
+# @package system.task_head_configs
+
+grover-atom:
+  module:
+    _target_: admet_prediction.taskheads.grover.AtomVocabHead
+    dim_emb: ${system.encoder_config.module.d_model}
+    vocab_size: 11688 # number of targets
+  loss:
+    _target_: torch.nn.NLLLoss
+    reduction: mean
+  weight: 1.0
+  state_path: null

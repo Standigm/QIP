@@ -1,0 +1,14 @@
+# @package logger
+
+mlflow_logger:
+  _target_: lightning.pytorch.loggers.MLFlowLogger
+  experiment_name: "ADMET_PROJECT"
+  run_name: "${mode}/${name}"
+  tracking_uri: https://mlflow.standigm.com
+  tags:
+    task: "ADMET PROJECT ${mode}"
+    version: ${version}
+    desc: "model ${version}"
+  save_dir: "${work_dir}/mlflow"
+  prefix: ""
+  artifact_location: None

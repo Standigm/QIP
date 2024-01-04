@@ -1,0 +1,12 @@
+# @package system.encoder_config
+
+module:
+  _target_: admet_prediction.encoders.gps.gnn.GNNEncoder
+  model: gatv2
+  d_model: 384
+  nhead: 6
+  dropout: 0.1
+  layer_norm: True
+  num_layer: 4
+  
+state_path: null

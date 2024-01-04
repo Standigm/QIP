@@ -1,0 +1,15 @@
+# @package system.encoder_config
+
+defaults:
+  - grpe/default.yaml
+
+module:
+  num_layer: 12
+  d_model: 768
+  nhead: 32
+  dim_feedforward: 768
+  max_hop: 5
+  num_node_type: 4609
+  num_edge_type: 30
+  dropout: 0.0
+  norm_mode: "pre"

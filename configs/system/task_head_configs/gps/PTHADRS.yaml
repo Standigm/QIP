@@ -1,0 +1,31 @@
+# @package system.task_head_configs
+
+defaults:
+  - "gps/task_head_default/PubChemQC-B3LYP-PM6/pubchemqc-b3lyp-pm6"
+  - "gps/task_head_default/Desc/descriptors.yaml"
+  - "gps/task_head_default/grover/grover_atom"
+  - "gps/task_head_default/grover/grover_fg"
+
+pubchemqc-b3lyp-pm6:
+  weight: 0.42
+
+descriptors:
+  weight: 0.42
+
+grover-atom:
+  weight: 0.04
+
+grover-fg:
+  weight: 0.04
+
+# pubchemqc-b3lyp-pm6:
+#   weight: 0.33
+
+# descriptors:
+#   weight: 0.33
+
+# grover-atom:
+#   weight: 0.17
+
+# grover-fg:
+#   weight: 0.17

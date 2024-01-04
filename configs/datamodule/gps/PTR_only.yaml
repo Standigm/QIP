@@ -1,0 +1,6 @@
+# @package datamodule
+
+defaults:
+  - gps/multidata_default.yaml
+  - gps/dataset_configs:
+      - "Desc/v1_0_1"

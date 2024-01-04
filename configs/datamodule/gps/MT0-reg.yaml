@@ -1,0 +1,25 @@
+defaults:
+  - gps/multidata_default.yaml
+  - gps/dataset_configs:
+      - "TDC/caco2_wang/v1_0_0.yaml"
+      
+      
+      
+      - "TDC/lipophilicity_astrazeneca/v1_0_0.yaml"
+      - "TDC/solubility_aqsoldb/v1_0_0.yaml"
+      
+      - "TDC/ppbr_az/v1_0_0.yaml"
+      - "TDC/vdss_lombardo/v1_0_0.yaml"
+      
+      
+      
+      
+      
+      
+      - "TDC/half_life_obach/v1_0_0.yaml"
+      - "TDC/clearance_microsome_az/v1_0_0.yaml"
+      - "TDC/clearance_hepatocyte_az/v1_0_0.yaml"
+      
+      
+      
+      - "TDC/ld50_zhu/v1_0_0.yaml"

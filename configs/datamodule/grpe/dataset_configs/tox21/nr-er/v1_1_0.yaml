@@ -1,0 +1,19 @@
+# @package datamodule.dataset_configs
+
+tox21-nr-er:
+  task_name: tox21-nr-er
+  dataset:
+    _target_: admet_prediction.datamodules.datasets.MoleculeGraphFromSMILESDataset
+    root: /db2/data/ADMET/data_final/data_refined/livertox/
+    raw_file_names:
+      - testset_smiles_filtered.csv
+      - trainset_smiles_filtered.csv
+    raw_label_file_names:
+      - testset_labels_filtered.csv
+      - trainset_labels_filtered.csv
+    transform:
+      _target_: admet_prediction.datamodules.transforms.Compose
+      transforms:
+        - _target_: admet_prediction.datamodules.transforms.ShortestPathGenerator
+        - _target_: admet_prediction.datamodules.transforms.OneHotEdgeAttr
+  split_dict_name: "split_dict_filtered.pt"

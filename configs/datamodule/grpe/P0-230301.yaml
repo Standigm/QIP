@@ -1,0 +1,6 @@
+# @package datamodule
+
+defaults:
+  - multidata.yaml
+  - dataset_configs:
+      - "nablaDFT/v1_0_0"

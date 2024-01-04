@@ -1,0 +1,9 @@
+# @package datamodule
+
+_target_: admet_prediction.datamodules.multi.MultiDataModule
+batch_size: 8 # default batch_size
+num_workers: 0
+collate_fn:
+  _target_: admet_prediction.datamodules.collaters.GraphDenseCollater
+  max_num_nodes: 256
+  offset: 128

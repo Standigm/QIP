@@ -1,0 +1,6 @@
+# @package trainer
+
+accumulate_grad_batches: 16
+
+# log_every_n_steps * accumulate_grad_batches, but less than the number of batches
+val_check_interval: 256 # 1024 

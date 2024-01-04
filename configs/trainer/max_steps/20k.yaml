@@ -1,0 +1,4 @@
+# @package trainer
+
+max_steps: 20_000
+max_epochs: null

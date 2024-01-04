@@ -1,0 +1,21 @@
+# @package datamodule.dataset_configs
+
+grover-fg:
+  task_name: grover-fg
+  dataset:
+    _target_: admet_prediction.datamodules.datasets.MoleculeGraphFromSMILESDataset
+    root: /db2/data/ADMET/data_final/data_refined/grover-fg_new/
+    raw_file_names:
+      - tdc_smiles.csv
+      - pm6_smiles.csv
+    raw_label_file_names:
+      - tdc_fg.csv
+      - pm6_fg.csv
+    pre_transform:
+      _target_: admet_prediction.datamodules.transforms.Compose
+      transforms:
+        - _target_: admet_prediction.datamodules.transforms.RandomWalkGenerator
+          ksteps: [1,17]
+          space_dim: 0
+
+  split_dict_name: null

@@ -1,0 +1,11 @@
+# @package datamodule
+
+defaults:
+  - multidata.yaml
+  - dataset_configs:
+      - "hERG/v3_0_0"
+      - "lipophilicity/v3_0_0"
+      - "MS/human/v3_0_0"
+      - "MS/mouse/v3_0_0"
+      - "permeability/v3_0_0"
+      - "solubility/pbs/v3_0_0"

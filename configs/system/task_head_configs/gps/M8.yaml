@@ -1,0 +1,56 @@
+# @package system.task_head_configs
+
+defaults:
+  - "gps/task_head_default/pka/pka-acidic"
+  - "gps/task_head_default/pka/pka-basic"
+  - "gps/task_head_default/tox21/tox21-sr-mmp"
+  - "gps/task_head_default/tox21/tox21-nr-er"
+  - "gps/task_head_default/tox21/tox21-nr-aromatase"
+  - "gps/task_head_default/tox21/tox21-nr-ahr"
+  - "gps/task_head_default/tox21/tox21-sr-atad5"
+  - "gps/task_head_default/tox21/tox21-sr-p53"
+  - "gps/task_head_default/tox21/tox21-sr-hse"
+  - "gps/task_head_default/tox21/tox21-sr-are"
+  - "gps/task_head_default/tox21/tox21-nr-er-lbd"
+  - "gps/task_head_default/tox21/tox21-nr-ppar-gamma"
+  - "gps/task_head_default/tox21/tox21-nr-ar-lbd"
+  - "gps/task_head_default/tox21/tox21-nr-ar"
+  - "gps/task_head_default/dili/dili"
+  - "gps/task_head_default/hepatox/hepatox"
+  - "gps/task_head_default/livertox/livertox"
+
+
+pka-acidic:
+  weight: 0.15
+pka-basic:
+  weight: 0.15
+tox21-sr-mmp:
+  weight: 0.15
+tox21-nr-er:
+  weight: 0.15
+tox21-nr-aromatase:
+  weight: 0.15
+tox21-nr-ahr:
+  weight: 0.15
+tox21-sr-atad5:
+  weight: 0.15
+tox21-sr-p53:
+  weight: 0.15
+tox21-sr-hse:
+  weight: 0.15
+tox21-sr-are:
+  weight: 0.15
+tox21-nr-er-lbd:
+  weight: 0.15
+tox21-nr-ppar-gamma:
+  weight: 0.15
+tox21-nr-ar-lbd:
+  weight: 0.15
+tox21-nr-ar:
+  weight: 0.15
+dili:
+  weight: 0.15
+hepatox:
+  weight: 0.15
+livertox:
+  weight: 0.15

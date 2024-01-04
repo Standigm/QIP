@@ -1,0 +1,5 @@
+# @package trainer
+
+strategy:
+  _target_: lightning.pytorch.strategies.FSDPStrategy
+  cpu_offload: True

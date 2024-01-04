@@ -1,0 +1,8 @@
+# @package logger
+
+tf_logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "${work_dir}/"
+  name: "tensorboard/"
+  version: "${name}_${version}"
+  prefix: ""

@@ -1,0 +1,10 @@
+# @package callbacks
+
+early_stopping:
+  _target_: lightning.pytorch.callbacks.EarlyStopping
+  monitor: "val/loss" # name of the logged metric which determines when model is improving
+  mode: "min" # can be "max" or "min"
+  patience: 500 # how many checks of not improving until training stops
+  min_delta: 0 # minimum change in the monitored metric needed to qualify as an improvement
+  # divergence_threshold: 10.0 # Stops training as soon as the monitored quantity becomes worse than this threshold.
+  check_on_train_epoch_end: False # the check runs at the end of the validation

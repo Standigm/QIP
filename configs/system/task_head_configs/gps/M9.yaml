@@ -1,0 +1,132 @@
+# @package system.task_head_configs
+
+defaults:
+  - "gps/task_head_default/CYP/cyp-1a2"
+  - "gps/task_head_default/CYP/cyp-2c9"
+  - "gps/task_head_default/CYP/cyp-2c19"
+  - "gps/task_head_default/CYP/cyp-2d6"
+  - "gps/task_head_default/CYP/cyp-3a4"
+  - "gps/task_head_default/hERG/herg"
+  - "gps/task_head_default/lipophilicity/lipophilicity"
+  - "gps/task_head_default/MS/ms-human"
+  - "gps/task_head_default/MS/ms-mouse"
+  - "gps/task_head_default/permeability/permeability"
+  - "gps/task_head_default/solubility/solubility-pbs"
+  - "gps/task_head_default/solubility/solubility-dmso"
+  - "gps/task_head_default/solubility/solubility-water"
+  - "gps/task_head_default/TDC/TDC-Caco2-Wang"
+
+  - "gps/task_head_default/TDC/TDC-HIA-Hou"
+  - "gps/task_head_default/TDC/TDC-Pgp-Broccatelli"
+  - "gps/task_head_default/TDC/TDC-Bioavailability-Ma"
+  - "gps/task_head_default/TDC/TDC-Lipophilicity-AstraZeneca"
+  - "gps/task_head_default/TDC/TDC-Solubility-AqSolDB"
+
+  - "gps/task_head_default/TDC/TDC-BBB-Martins"
+  - "gps/task_head_default/TDC/TDC-PPBR-AZ"
+  - "gps/task_head_default/TDC/TDC-VDss-LomBardo"
+
+  - "gps/task_head_default/TDC/TDC-CYP2D6-Veith"
+  - "gps/task_head_default/TDC/TDC-CYP3A4-Veith"
+
+  - "gps/task_head_default/TDC/TDC-CYP2C9-Veith"
+  - "gps/task_head_default/TDC/TDC-CYP2C9-Substrate-CarbonMangels"
+  - "gps/task_head_default/TDC/TDC-CYP2D6-Substrate-CarbonMangels"
+  - "gps/task_head_default/TDC/TDC-CYP3A4-Substrate-CarbonMangels"
+  - "gps/task_head_default/TDC/TDC-Half-Life-Obach"
+  - "gps/task_head_default/TDC/TDC-Clearance-Hepatocyte-AZ"
+  - "gps/task_head_default/TDC/TDC-LD50-Zhu"
+  - "gps/task_head_default/TDC/TDC-hERG"
+
+  - "gps/task_head_default/TDC/TDC-AMES"
+  - "gps/task_head_default/TDC/TDC-DILI"
+
+  - "gps/task_head_default/pKa/acidic"
+  - "gps/task_head_default/pKa/basic"
+
+  - "gps/task_head_default/Hepatox/hepatox"
+  - "gps/task_head_default/LiverTox/livertox"
+
+
+cyp-1a2:
+  weight: 0.115
+cyp-2c9:
+  weight: 0.115
+cyp-2c19:
+  weight: 0.115
+cyp-2d6:
+  weight: 0.089
+cyp-3a4:
+  weight: 0.154
+herg:
+  weight: 1
+lipophilicity:
+  weight: 0.286
+ms-human:
+  weight: 0.266
+ms-mouse:
+  weight: 0.117
+permeability:
+  weight: 0.107
+solubility-pbs:
+  weight: 1.155
+solubility-dmso:
+  weight: 0.81
+solubility-water:
+  weight: 0.283
+TDC-Caco2-Wang:
+  weight: 0.015
+TDC-HIA-Hou:
+  weight: 0.009
+TDC-Pgp-Broccatelli:
+  weight: 0.019
+TDC-Bioavailability-Ma:
+  weight: 0.01
+TDC-Lipophilicity-AstraZeneca:
+  weight: 0.067
+TDC-Solubility-AqSolDB:
+  weight: 0.141
+
+TDC-BBB-Martins:
+  weight: 0.032
+TDC-PPBR-AZ:
+  weight: 0.026
+TDC-VDss-LomBardo:
+  weight: 0.018
+
+TDC-CYP2D6-Veith:
+  weight: 0.21
+TDC-CYP3A4-Veith:
+  weight: 0.197
+
+TDC-CYP2C9-Veith:
+  weight: 0.193
+TDC-CYP2C9-Substrate-CarbonMangels:
+  weight: 0.011
+TDC-CYP2D6-Substrate-CarbonMangels:
+  weight: 0.011
+TDC-CYP3A4-Substrate-CarbonMangels:
+  weight: 0.011
+TDC-Half-Life-Obach:
+  weight: 0.019
+TDC-Clearance-Hepatocyte-AZ:
+  weight: 0.019
+TDC-LD50-Zhu:
+  weight: 0.109
+TDC-hERG:
+  weight: 0.01
+
+TDC-AMES:
+  weight: 0.116
+TDC-DILI:
+  weight: 0.008
+pka-acidic:
+  weight: 0.08
+pka-basic:
+  weight: 0.104
+dili:
+  weight: 0.015
+hepatox:
+  weight: 0.03
+livertox:
+  weight: 0.02

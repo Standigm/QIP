@@ -1,0 +1,9 @@
+# @package system.task_head_configs
+defaults:
+  task_head_default:
+    - "hERG/herg"
+    - "lipophilicity/lipophilicity"
+    - "MS/ms-human"
+    - "MS/ms-mouse"
+    - "permeability/permeability"
+    - "solubility/solubility-pbs"

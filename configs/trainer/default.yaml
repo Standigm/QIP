@@ -1,0 +1,9 @@
+_target_: lightning.pytorch.Trainer
+
+default_root_dir: ${work_dir}
+
+gradient_clip_val: 1.0
+# amp_backend: native
+
+log_every_n_steps: 64 # based on global_step
+deterministic: warn

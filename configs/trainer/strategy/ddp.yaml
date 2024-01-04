@@ -1,0 +1,7 @@
+# @package trainer
+
+strategy:
+  _target_: lightning.pytorch.strategies.DDPStrategy
+  timeout: 
+    _target_: datetime.timedelta
+    seconds: 14400 # 4 hours

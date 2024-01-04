@@ -1,0 +1,17 @@
+# @package system.optimizer_configs
+
+- optimizer:
+    _target_: torch.optim.AdamW
+    lr: 1e-6 # use very small lr with CosineAnnealingWarmUpRestartsWithDecay
+    # params: null # null or '' for all parameters
+    # modules: null # null or '' for all module parameters
+  lr_scheduler:
+    scheduler:
+      _target_: admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
+      T_0: 10
+      T_mult: null
+      eta_max: 1e-5
+      T_up: 0
+      gamma: 1.0
+    interval: "epoch"
+    frequency: 1

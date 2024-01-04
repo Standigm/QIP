@@ -1,0 +1,7 @@
+# @package system.task_head_configs
+
+defaults:
+  - "gps/task_head_default/PubChemQC-B3LYP-PM6/pubchemqc-b3lyp-pm6-H"
+
+pubchemqc-b3lyp-pm6-h:
+  weight: 1

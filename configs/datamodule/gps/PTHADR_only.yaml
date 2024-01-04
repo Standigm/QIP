@@ -1,0 +1,7 @@
+# @package datamodule
+
+defaults:
+  - gps/multidata_default.yaml
+  - gps/dataset_configs:
+      - "PubChemQC-B3LYP-PM6/v1_0_1"
+      - "Desc/v1_0_1"

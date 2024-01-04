@@ -1,0 +1,35 @@
+# @package _global_
+
+# specify here default training configuration
+defaults:
+  - _self_
+  - trainer: null
+  - datamodule: null
+  - callbacks: null
+  - logger: null
+  - mode: train.yaml
+
+  - experiment: null
+  # enable color logging
+  - override hydra/hydra_logging: colorlog
+  - override hydra/job_logging: colorlog
+
+# path to original working directory
+# hydra hijacks working directory by changing it to the current log directory,
+# so it's useful to have this path as a special variable
+# https://hydra.cc/docs/next/tutorials/basic/running_your_app/working_directory
+curr_dir: ${hydra:runtime.cwd}
+work_dir: ${hydra:runtime.output_dir}
+
+# path to folder with data
+data_dir: ${curr_dir}/data/
+
+# exec_time
+exec_time: ${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+# seed for random number generators in pytorch, numpy and python.random
+seed: null
+
+# name of the run, accessed by loggers
+name: admet_project
+version: "v2.0.0"

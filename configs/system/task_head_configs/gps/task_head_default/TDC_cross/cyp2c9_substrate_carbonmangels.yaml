@@ -1,0 +1,16 @@
+# @package system.task_head_configs
+
+cyp2c9_substrate_carbonmangels:
+  module:
+    _target_: admet_prediction.taskheads.gps.SANGraphHead
+    in_features: ${system.encoder_config.module.d_model}
+    out_features: 1
+    bias: True
+  loss:
+    _target_: torch.nn.BCEWithLogitsLoss
+  weight: 1
+  metrics:
+    - _target_: torchmetrics.classification.BinaryAveragePrecision
+  state_path: null
+  post_process:
+    _target_: torch.nn.Sigmoid

@@ -1,0 +1,11 @@
+# @package system.task_head_configs
+
+defaults:
+  - "gps/task_head_default/CYP/cyp-1a2"
+  - "gps/task_head_default/CYP/cyp-2c9"
+
+
+cyp-1a2:
+  weight: 0.115
+cyp-2c9:
+  weight: 0.115

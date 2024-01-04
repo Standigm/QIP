@@ -1,0 +1,14 @@
+# @package _global_
+
+# default running mode
+
+mode: train
+
+hydra:
+  job:
+    chdir: True
+  # default output paths for all file logs
+  run:
+    dir: ${curr_dir}/outputs/train/runs/${name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    subdir: ${curr_dir}/outputs/train/multiruns/${name}/${now:%Y-%m-%d}/${now:%H-%M-%S}/${hydra.job.num}

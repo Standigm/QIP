@@ -1,0 +1,11 @@
+# @package system.task_head_configs
+
+defaults:
+  - "gps/task_head_default/grover/grover_atom"
+  - "gps/task_head_default/grover/grover_fg"
+
+grover-atom:
+  weight: 0.04
+
+grover-fg:
+  weight: 0.04

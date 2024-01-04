@@ -1,0 +1,8 @@
+# @package system.task_head_configs
+
+defaults:
+  - "gps/task_head_default/Desc/descriptors.yaml"
+
+descriptors:
+  weight: 1
+

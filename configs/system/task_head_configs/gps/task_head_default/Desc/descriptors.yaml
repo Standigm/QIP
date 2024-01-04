@@ -1,0 +1,19 @@
+# @package system.task_head_configs
+
+descriptors:
+  module:
+    _target_: admet_prediction.taskheads.gps.SANGraphHead
+    in_features: ${system.encoder_config.module.d_model}
+    out_features: 202 # number of targets
+    bias: True
+  loss:
+    _target_: torch.nn.SmoothL1Loss
+  weight: 1.0
+  metrics:
+    - _target_: torchmetrics.MeanAbsoluteError
+    - _target_: torchmetrics.PearsonCorrCoef
+      num_outputs: 202
+    - _target_: torchmetrics.SpearmanCorrCoef
+      num_outputs: 202
+  state_path: null
+  post_process: null

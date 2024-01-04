@@ -1,0 +1,8 @@
+# @package datamodule
+
+defaults:
+  - gps/multidata_default.yaml
+  - gps/dataset_configs:
+      - "PubChemQC/v1_0_0"
+      - "nablaDFT/v1_0_0"
+      - "PubChemQC-B3LYP-PM6/v1_0_0"

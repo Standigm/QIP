@@ -1,0 +1,18 @@
+# @package system.task_head_configs
+
+lipophilicity_astrazeneca:
+  module:
+    _target_: admet_prediction.taskheads.gps.SANGraphHead
+    in_features: ${system.encoder_config.module.d_model}
+    out_features: 1
+    bias: True
+  loss:
+    _target_: torch.nn.SmoothL1Loss
+  weight: 1
+  metrics:
+    - _target_: torchmetrics.MeanAbsoluteError
+      num_outputs: 1
+  state_path: null
+  post_process:
+    _target_: admet_prediction.datamodules.transforms.standardizers.RescaleFromStatFile
+    statistics_file: /db2/data/ADMET/data_final/data_refined/TDC/lipophilicity_astrazeneca/raw/stats.pt

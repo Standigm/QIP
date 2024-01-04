@@ -1,0 +1,20 @@
+defaults:
+  - multidata.yaml
+  - dataset_configs:
+      - "pka/acidic/v1_1_0.yaml"
+      - "pka/basic/v1_1_0.yaml"
+      - "tox21/sr-mmp/v1_1_0.yaml"
+      - "tox21/nr-er/v1_1_0.yaml"
+      - "tox21/nr-aromatase/v1_1_0.yaml"
+      - "tox21/nr-ahr/v1_1_0.yaml"
+      - "tox21/sr-atad5/v1_1_0.yaml"
+      - "tox21/sr-p53/v1_1_0.yaml"
+      - "tox21/sr-hse/v1_1_0.yaml"
+      - "tox21/sr-are/v1_1_0.yaml"
+      - "tox21/nr-er-lbd/v1_1_0.yaml"
+      - "tox21/nr-ppar-gamma/v1_1_0.yaml"
+      - "tox21/nr-ar-lbd/v1_1_0.yaml"
+      - "tox21/nr-ar/v1_1_0.yaml"
+      - "dili/v1_1_0.yaml"
+      - "hepatox/v1_1_0.yaml"
+      - "livertox/v1_1_0.yaml"
