@@ -1,4 +1,4 @@
-name: chemenv
+name: qip
 channels:
   - openeye
   - rdkit
