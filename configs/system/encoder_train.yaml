@@ -1,6 +1,6 @@
 # @package system
 
-_target_: admet_prediction.systems.EncoderTrainSystem
+_target_: qip.systems.EncoderTrainSystem
 encoder_config: null
 task_head_configs: null
 optimizer_configs: null

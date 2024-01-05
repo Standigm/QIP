@@ -2,12 +2,12 @@
 
 cyp2d6_substrate_carbonmangels:
   module:
-    _target_: admet_prediction.taskheads.gps.SANGraphHead
+    _target_: qip.taskheads.gps.SANGraphHead
     in_features: ${system.encoder_config.module.d_model}
     out_features: 1
     bias: True
   loss:
-    _target_: admet_prediction.modules.losses.SigmoidFocalLoss
+    _target_: qip.modules.losses.SigmoidFocalLoss
     alpha: 0.7218045112781954
   weight: 0.05
   metrics:

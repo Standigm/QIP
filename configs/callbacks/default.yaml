@@ -2,7 +2,7 @@
 
 model_checkpoint:
   # _target_: lightning.pytorch.callbacks.ModelCheckpoint
-  _target_: admet_prediction.callbacks.modelcheckpoint.ModelCheckpointWithSubModules
+  _target_: qip.callbacks.modelcheckpoint.ModelCheckpointWithSubModules
   monitor: "val/loss" # name of the logged metric which determines when model is improving
   mode: "min" # can be "max" or "min"
   save_top_k: 1 # save k best models (determined by above metric)

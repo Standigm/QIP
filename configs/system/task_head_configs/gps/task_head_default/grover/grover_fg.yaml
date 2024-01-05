@@ -2,7 +2,7 @@
 
 grover-fg:
   module:
-    _target_: admet_prediction.taskheads.grover.FunctionalGroupHead
+    _target_: qip.taskheads.grover.FunctionalGroupHead
     dim_emb: ${system.encoder_config.module.d_model}
     fg_size: 85 # number of targets
     

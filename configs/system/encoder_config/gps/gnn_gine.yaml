@@ -1,7 +1,7 @@
 # @package system.encoder_config
 
 module:
-  _target_: admet_prediction.encoders.gps.gnn.GNNEncoder
+  _target_: qip.encoders.gps.gnn.GNNEncoder
   model: gine
   d_model: 256
   nhead: 1

@@ -1,7 +1,7 @@
 # @package system.encoder_config
 
 module:
-  _target_: admet_prediction.encoders.gps.model.GPSEncoder
+  _target_: qip.encoders.gps.model.GPSEncoder
   d_model: 384 # encoder_config의 dim_emb와 같은 값, nhead의 배수
   nhead: 16
   dropout: 0.1

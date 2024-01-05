@@ -12,13 +12,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchmetrics
-import random # for sequantial update
 
 from lightning.pytorch.utilities.types import STEP_OUTPUT
 from lightning.fabric.utilities.cloud_io import _load as load
 from lightning.fabric.utilities.cloud_io import _atomic_save as save
 from omegaconf import DictConfig
-from torch import ScriptModule
 from torch.nn.modules.module import _IncompatibleKeys
 
 from qip.datamodules.multi import MultiDataModule
@@ -26,8 +24,6 @@ from qip.systems.train_system import TrainSystem
 from qip.typing import (
     PATH,
     Any,
-    Callable,
-    Dict,
     EncoderTaskOutput,
     Mapping,
     Optional,
@@ -61,16 +57,16 @@ class EncoderTrainSystem(TrainSystem):
         ValueError: If checkpoint_path is not a string or None.
     """
 
-    VERSION = "v2.0.0"
+    VERSION = "v1.0.0"
 
     def __init__(
         self,
         encoder_config: DictConfig,
         task_head_configs: DictConfig,
+        optimizer_configs: Optional[Union[DictConfig, List[DictConfig]]] = None,
         checkpoint_path: Optional[str] = None,
         trainable_modules: Optional[List[str]] = None,
         frozen_modules: Optional[List[str]] = None,
-        optimizer_configs: Optional[Union[DictConfig, List[DictConfig]]] = None,
     ):
         super().__init__()
 
@@ -211,6 +207,7 @@ class EncoderTrainSystem(TrainSystem):
             # MultiDataModule is not connected. so dataset_names are not defined
             return tuple()
 
+    
     def configure_sharded_model(self):
         """
         Configures the sharded model by wrapping the encoder and each task head with a sharded model wrapper.
@@ -401,9 +398,7 @@ class EncoderTrainSystem(TrainSystem):
         return super().on_fit_start()
 
     def forward(self, data: Mapping, dataloader_idx: Optional[int] = None) -> OrderedDict[str, Any]:
-        # encoder_outputs = {"dataset_name1": encoder_output}
-        # task_outputs = {"dataset_name1": {"task_name1": task1_output, "task_name2": task2_output, ...},
-        #                 "dataset_name2": {"task_name1": task1_output, "task_name3": task3_output, ...},}
+        
         task_outputs = OrderedDict()
         encoder_outputs = OrderedDict()
   
@@ -456,7 +451,7 @@ class EncoderTrainSystem(TrainSystem):
             return task_outputs, encoder_outputs
 
     def training_step(self, batch, batch_idx, *args, **kwargs) -> Any:
-        task_outputs, encoder_outputs = self(batch)
+        task_outputs, _ = self(batch)
 
         total_train_loss = 0.0
         for dataset_name, task_name in zip(self.dataset_names, self.task_names):
@@ -553,7 +548,7 @@ class EncoderTrainSystem(TrainSystem):
                             eval_outputs[
                                 self.format_log_title(split, metric_name, task_name, dataset_name, subtask_idx)
                             ] = val
-                    # TODO: add other metrics such as confusion matrix.
+                    
                 except Exception as e:
                     warn_once(log, f"Skip logging {metric} {task_name}-{dataset_name}:\n{e}")
 

@@ -3,7 +3,7 @@
 cyp3a4_veith:
   task_name: cyp3a4_veith
   dataset:
-    _target_: admet_prediction.datamodules.datasets.MoleculeGraphFromSMILESDataset
+    _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
     root: /db2/data/ADMET/data_final/data_refined/TDC/cyp3a4_veith
     raw_file_names:
       - testset_smiles.csv
@@ -12,9 +12,9 @@ cyp3a4_veith:
       - testset_labels.csv
       - trainset_labels.csv
     pre_transform:
-      _target_: admet_prediction.datamodules.transforms.Compose
+      _target_: qip.datamodules.transforms.Compose
       transforms:
-        - _target_: admet_prediction.datamodules.transforms.RandomWalkGenerator
+        - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]
           space_dim: 0
   split_dict_name: "split_dict.pt"

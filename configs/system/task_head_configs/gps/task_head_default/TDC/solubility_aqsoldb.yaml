@@ -2,7 +2,7 @@
 
 solubility_aqsoldb:
   module:
-    _target_: admet_prediction.taskheads.gps.SANGraphHead
+    _target_: qip.taskheads.gps.SANGraphHead
     in_features: ${system.encoder_config.module.d_model}
     out_features: 1
     bias: True
@@ -13,5 +13,5 @@ solubility_aqsoldb:
     - _target_: torchmetrics.MeanAbsoluteError
   state_path: null
   post_process:
-    _target_: admet_prediction.datamodules.transforms.standardizers.RescaleFromStatFile
+    _target_: qip.datamodules.transforms.standardizers.RescaleFromStatFile
     statistics_file: /db2/data/ADMET/data_final/data_refined/TDC/solubility_aqsoldb/raw/stats.pt

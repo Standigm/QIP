@@ -5,7 +5,7 @@ defaults:
   # override
   # system config
   - /system/encoder_config: "gps/medium.yaml"
-  - /system/task_head_configs: gps/PTHADR.yaml
+  - /system/task_head_configs: "gps/PTHADR.yaml"
   - /system/optimizer_configs: null
   # train config
   - override /trainer:
@@ -42,7 +42,7 @@ system:
         # modules: null # null or '' for all module parameters
       lr_scheduler:
         scheduler:
-          _target_: admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
+          _target_: qip.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
           T_0: 37_500
           T_mult: null
           eta_max: 2e-4

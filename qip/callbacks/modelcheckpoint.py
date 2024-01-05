@@ -2,10 +2,9 @@ import logging
 from collections import OrderedDict
 from datetime import timedelta
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional
 
 import lightning as L
-import numpy as np
 from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning_fabric.utilities.cloud_io import _load as load
 

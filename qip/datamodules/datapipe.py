@@ -5,7 +5,7 @@ from qip.datamodules.featurizers import FeaturizerBase
 
 from collections import namedtuple
 from qip.utils.misc import _type_error_print_format
-from qip.typing import Data, Optional, Any, Batch, Callable, Union, Iterable
+from qip.typing import Optional, Any, Batch, Callable, Union, Iterable
 
 
 class DataPipeline(namedtuple("DataPipeline", ["featurizer", "collater", "pre_transform", "transform"])):

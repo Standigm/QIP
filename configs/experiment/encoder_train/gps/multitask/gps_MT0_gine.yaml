@@ -19,7 +19,7 @@ defaults:
         "precision/32"
       ]
   - override /callbacks: default.yaml
-  - override /datamodule: "gps/MT0-230629.yaml"
+  - override /datamodule: "gps/MT0.yaml"
   - override /logger: ["csv", "wandb"]
 
 # all parameters below will be merged with parameters from default configurations set above
@@ -52,7 +52,7 @@ system:
   #       # modules: null # null or '' for all module parameters
   #     lr_scheduler:
   #       scheduler:
-  #         _target_: admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
+  #         _target_: qip.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
   #         T_0: 10_000
   #         T_mult: null
   #         eta_max: 15e-5

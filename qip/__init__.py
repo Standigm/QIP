@@ -1,3 +1,3 @@
-from admet_prediction import typing
-from admet_prediction import datamodules
-from admet_prediction import callbacks, encoders, systems
+from qip import typing
+from qip import datamodules
+from qip import callbacks, encoders, systems
