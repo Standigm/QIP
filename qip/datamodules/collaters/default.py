@@ -3,7 +3,7 @@ from typing import AbstractSet, Any, Mapping, Sequence, Tuple, Union
 import torch
 from torch.utils.data import default_collate
 
-from admet_prediction.typing import BaseData, Data, Batch, DATACOLLECTIONS
+from qip.typing import BaseData, Data, Batch, DATACOLLECTIONS
 
 
 class DefaultCollater:

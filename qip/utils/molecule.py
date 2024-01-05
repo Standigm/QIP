@@ -6,7 +6,7 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Descriptors, rdMolDescriptors
 from rdkit.ML.Descriptors.MoleculeDescriptors import MolecularDescriptorCalculator
-from admet_prediction.typing import Data
+from qip.typing import Data
 import numpy as np
 # periodic table mapping
 PERIODIC_TABLE = pd.read_csv(Path(__file__).parent / "periodic_table.csv")

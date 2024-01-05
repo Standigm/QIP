@@ -1,15 +1,15 @@
-from admet_prediction.datamodules.transforms.base import Compose, TransformBase
-from admet_prediction.datamodules.transforms.coordinate import Cal3DdistanceGenerator
-from admet_prediction.datamodules.transforms.graph import (
+from qip.datamodules.transforms.base import Compose, TransformBase
+from qip.datamodules.transforms.coordinate import Cal3DdistanceGenerator
+from qip.datamodules.transforms.graph import (
     OneHotEdgeAttr,
     ShortestPathGenerator,
 )
-from admet_prediction.datamodules.transforms.label import NanToNum
-from admet_prediction.datamodules.transforms.laplacian import LaplacianGenerator
-from admet_prediction.datamodules.transforms.standardizers import (
+from qip.datamodules.transforms.label import NanToNum
+from qip.datamodules.transforms.laplacian import LaplacianGenerator
+from qip.datamodules.transforms.standardizers import (
     LabelStandardizer,
     NablaDFTStandardizer,
     StandardizerFromStatFile,
     RescaleFromStatFile,
 )
-from admet_prediction.datamodules.transforms.gps_randomwalk import RandomWalkGenerator
+from qip.datamodules.transforms.gps_randomwalk import RandomWalkGenerator

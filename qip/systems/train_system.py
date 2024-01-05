@@ -14,10 +14,10 @@ from collections import defaultdict
 from typing import Optional, Any, Mapping, Dict, Callable, Tuple, List, Sequence, Union, Iterable
 from torchmetrics import Metric
 
-from admet_prediction.utils.train import freeze_module, unfreeze_module
-from admet_prediction.utils.misc import get_logger
+from qip.utils.train import freeze_module, unfreeze_module
+from qip.utils.misc import get_logger
 
-from admet_prediction.typing import PATH
+from qip.typing import PATH
 from lightning.pytorch.core.optimizer import do_nothing_closure
 
 log = get_logger(__name__)
@@ -85,7 +85,7 @@ class TrainSystem(L.LightningModule):
                     },
                     "lr_scheduler": {
                         "scheduler": {
-                            "_target_": "admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay",
+                            "_target_": "qip.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay",
                             "T_0": self.trainer.estimated_stepping_batches,
                             "T_mult": None,
                             "eta_max": 5e-4,
@@ -402,89 +402,89 @@ class TrainSystem(L.LightningModule):
                     unfreeze_module(module)
         return True
 
-    @abstractmethod
-    def to_torch(self, file_path: Optional[PATH] = None, **kwargs: Any) -> Any:
-        """
-        Saves the model to a PyTorch checkpoint file or loads the model from a
-        checkpoint file, depending on whether `file_path` is provided.
+    # @abstractmethod
+    # def to_torch(self, file_path: Optional[PATH] = None, **kwargs: Any) -> Any:
+    #     """
+    #     Saves the model to a PyTorch checkpoint file or loads the model from a
+    #     checkpoint file, depending on whether `file_path` is provided.
 
-        Args:
-            file_path: A string indicating the path to a PyTorch checkpoint file
-                to save the model to or load the model from. If `None`, the method
-                simply returns the current state of the model.
-            **kwargs: Any. Additional arguments to pass.
+    #     Args:
+    #         file_path: A string indicating the path to a PyTorch checkpoint file
+    #             to save the model to or load the model from. If `None`, the method
+    #             simply returns the current state of the model.
+    #         **kwargs: Any. Additional arguments to pass.
 
-        Returns:
-            returns the saved object. Otherwise, returns None.
-        """
-        pass
+    #     Returns:
+    #         returns the saved object. Otherwise, returns None.
+    #     """
+    #     pass
 
-    def deploy_to_mlflow(
-        self,
-        version: Optional[str] = None,
-        tracking_url: Optional[str] = None,
-        eval_outputs: Optional[Dict[str, Any]] = None,
-    ):
-        import mlflow
-        from mlflow.utils.file_utils import TempDir
-        import pandas as pd
+    # def deploy_to_mlflow(
+    #     self,
+    #     version: Optional[str] = None,
+    #     tracking_url: Optional[str] = None,
+    #     eval_outputs: Optional[Dict[str, Any]] = None,
+    # ):
+    #     import mlflow
+    #     from mlflow.utils.file_utils import TempDir
+    #     import pandas as pd
 
-        def _process_result_df(each_split_outputs) -> pd.DataFrame:
-            result_dfs = []
-            for outputs in each_split_outputs:
-                split = list(outputs.keys())[0].split("/")[0]
-                outputs = {"/".join(k.split("/")[1:]): v for k, v in outputs.items()}
-                result_dfs.append(pd.DataFrame([(k, v) for k, v in outputs.items()], columns=["metric", split]))
+    #     def _process_result_df(each_split_outputs) -> pd.DataFrame:
+    #         result_dfs = []
+    #         for outputs in each_split_outputs:
+    #             split = list(outputs.keys())[0].split("/")[0]
+    #             outputs = {"/".join(k.split("/")[1:]): v for k, v in outputs.items()}
+    #             result_dfs.append(pd.DataFrame([(k, v) for k, v in outputs.items()], columns=["metric", split]))
 
-            result_df = result_dfs[0]
-            for to_merge_df in result_dfs[1:]:
-                result_df: pd.DataFrame = pd.merge(result_df, to_merge_df, on="metric")
+    #         result_df = result_dfs[0]
+    #         for to_merge_df in result_dfs[1:]:
+    #             result_df: pd.DataFrame = pd.merge(result_df, to_merge_df, on="metric")
 
-            result_df = result_df.sort_values("metric")
-            result_df.to_csv("result.csv", index=False)
-            return result_df
+    #         result_df = result_df.sort_values("metric")
+    #         result_df.to_csv("result.csv", index=False)
+    #         return result_df
 
-        # dict to save
-        version = "unknown" if version is None else version
-        # dict to save
-        dict_to_upload = dict()
-        dict_to_upload["version"] = version  # model version
-        dict_to_upload["system_version"] = self.VERSION
-        dict_to_upload["data_pipeline"] = next(iter(self.trainer.datamodule.data_pipelines.values()))
-        for task_name in self.post_processes.keys():
-            if task_name not in ["nabladft", "pubchemqc"]:
-                self.post_processes[task_name] = torch.nn.Sigmoid()
-        dict_to_upload["post_processes"] = self.post_processes
-        dict_to_upload["available_tasks"] = list(self.task_heads.keys())
+    #     # dict to save
+    #     version = "unknown" if version is None else version
+    #     # dict to save
+    #     dict_to_upload = dict()
+    #     dict_to_upload["version"] = version  # model version
+    #     dict_to_upload["system_version"] = self.VERSION
+    #     dict_to_upload["data_pipeline"] = next(iter(self.trainer.datamodule.data_pipelines.values()))
+    #     for task_name in self.post_processes.keys():
+    #         if task_name not in ["nabladft", "pubchemqc"]:
+    #             self.post_processes[task_name] = torch.nn.Sigmoid()
+    #     dict_to_upload["post_processes"] = self.post_processes
+    #     dict_to_upload["available_tasks"] = list(self.task_heads.keys())
 
-        # save to mlflow server
-        mlflow.set_experiment("ADMET_MODEL")
-        if tracking_url is None:
-            tracking_url = os.environ.get("MLFLOW_TRACKING_URI", "https://mlflow.standigm.com")
-        mlflow.set_tracking_uri(tracking_url)
-        # run_id = mlflow.search_runs(filter_string="run_name='Production'").get('run_id', None)
-        # print(run_id)
+    #     # save to mlflow server
+    #     mlflow.set_experiment("ADMET_MODEL")
+    #     if tracking_url is None:
+    #         tracking_url = os.environ.get("MLFLOW_TRACKING_URI", "https://mlflow.standigm.com")
+    #     mlflow.set_tracking_uri(tracking_url)
+    #     # run_id = mlflow.search_runs(filter_string="run_name='Production'").get('run_id', None)
+    #     # print(run_id)
 
-        with mlflow.start_run(tags={"version": version, "desc": "ADMET model"}) as run:
-            # log model
-            mlflow.pytorch.log_model(self, version)
+    #     with mlflow.start_run(tags={"version": version, "desc": "ADMET model"}) as run:
+    #         # log model
+    #         mlflow.pytorch.log_model(self, version)
 
-            with TempDir() as tmp:
-                local_dir = tmp.path()
-                os.makedirs(local_dir, exist_ok=True)
-                state_dict_path = os.path.join(local_dir, "infos.pt")
-                torch.save(dict_to_upload, state_dict_path)
-                if eval_outputs is not None:
-                    eval_df = _process_result_df([eval_outputs])
-                    eval_df.to_csv(os.path.join(local_dir, "evaluation.csv"), index=False)
-                mlflow.log_artifacts(local_dir, version)
+    #         with TempDir() as tmp:
+    #             local_dir = tmp.path()
+    #             os.makedirs(local_dir, exist_ok=True)
+    #             state_dict_path = os.path.join(local_dir, "infos.pt")
+    #             torch.save(dict_to_upload, state_dict_path)
+    #             if eval_outputs is not None:
+    #                 eval_df = _process_result_df([eval_outputs])
+    #                 eval_df.to_csv(os.path.join(local_dir, "evaluation.csv"), index=False)
+    #             mlflow.log_artifacts(local_dir, version)
 
-                # mlflow.pyfunc.log_model(artifact_path, data_path=dict_to_upload, python_model=DummyModel())
-            for task_name in dict_to_upload["available_tasks"]:
-                model_uri = "runs:/{run_id}/{version}".format(run_id=run.info.run_id, version=version)
-                mlflow.register_model(model_uri, f"admet.{version}.{task_name}")
-            # mlflow.pytorch.log_state_dict(dict_to_upload, artifact_path)
-            artifact_uri = mlflow.get_artifact_uri(version)
-            # mlflow.get_tracking_uri()
+    #             # mlflow.pyfunc.log_model(artifact_path, data_path=dict_to_upload, python_model=DummyModel())
+    #         for task_name in dict_to_upload["available_tasks"]:
+    #             model_uri = "runs:/{run_id}/{version}".format(run_id=run.info.run_id, version=version)
+    #             mlflow.register_model(model_uri, f"admet.{version}.{task_name}")
+    #         # mlflow.pytorch.log_state_dict(dict_to_upload, artifact_path)
+    #         artifact_uri = mlflow.get_artifact_uri(version)
+    #         # mlflow.get_tracking_uri()
 
-        return artifact_uri, run.info.run_id
+    #     return artifact_uri, run.info.run_id

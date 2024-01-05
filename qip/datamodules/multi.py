@@ -11,8 +11,8 @@ from lightning.pytorch.utilities.types import (
 )
 from torch.utils.data import DataLoader, Dataset
 
-from admet_prediction.utils.misc import get_logger, warn_once
-from admet_prediction.datamodules.datapipe import DataPipeline
+from qip.utils.misc import get_logger, warn_once
+from qip.datamodules.datapipe import DataPipeline
 
 log = get_logger(__name__)
 

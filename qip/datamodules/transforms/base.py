@@ -2,7 +2,7 @@ from typing import AbstractSet, Mapping, Sequence, Union, Iterable
 
 import torch
 
-from admet_prediction.typing import DATACOLLECTIONS, Data
+from qip.typing import DATACOLLECTIONS, Data
 
 
 class TransformBase:

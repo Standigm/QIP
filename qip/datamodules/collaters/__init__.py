@@ -1,3 +1,2 @@
-from admet_prediction.datamodules.collaters.default import DefaultCollater
-from admet_prediction.datamodules.collaters.graph import GraphDenseCollater
-from admet_prediction.datamodules.collaters.grover_collater import GroverCollater
+from qip.datamodules.collaters.default import DefaultCollater
+from qip.datamodules.collaters.grover_collater import GroverCollater

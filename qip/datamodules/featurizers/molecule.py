@@ -1,6 +1,6 @@
 from openeye import oechem
-from admet_prediction.datamodules.featurizers.base import MolFeature, mol_feature_registry, safe_index
-from admet_prediction.typing import rdMol, OEMolBase, MOLTYPE
+from qip.datamodules.featurizers.base import MolFeature, mol_feature_registry, safe_index
+from qip.typing import rdMol, OEMolBase, MOLTYPE
 from rdkit import Chem
 
 # The functional group descriptors in RDkit.

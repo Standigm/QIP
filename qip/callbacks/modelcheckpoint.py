@@ -9,7 +9,7 @@ import numpy as np
 from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning_fabric.utilities.cloud_io import _load as load
 
-from admet_prediction.typing import PATH
+from qip.typing import PATH
 
 log = logging.getLogger(__name__)
 

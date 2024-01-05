@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from typing import List
-from admet_prediction.datamodules.featurizers.ogb import OGBFeaturizer
+from qip.datamodules.featurizers.ogb import OGBFeaturizer
 from omegaconf import DictConfig
 import lightning as L
 

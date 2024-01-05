@@ -1,9 +1,9 @@
 import torch
 
 # periodic table mapping
-from admet_prediction.utils.molecule import ATOMNUM2GROUP, ATOMNUM2PERIOD
-from admet_prediction.datamodules.featurizers.base import Featurizer, FeaturizerBase
-from admet_prediction.typing import MOLTYPE, rdMol, Data, Optional
+from qip.utils.molecule import ATOMNUM2GROUP, ATOMNUM2PERIOD
+from qip.datamodules.featurizers.base import Featurizer, FeaturizerBase
+from qip.typing import MOLTYPE, rdMol, Data, Optional
 
 
 from ogb.utils import smiles2graph

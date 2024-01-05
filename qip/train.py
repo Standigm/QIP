@@ -13,7 +13,7 @@ from lightning.pytorch.loggers.wandb import WandbLogger
 from lightning.pytorch.utilities.model_summary import ModelSummary
 from omegaconf import DictConfig, OmegaConf
 
-from admet_prediction.utils.misc import empty, finish, get_logger
+from qip.utils.misc import empty, finish, get_logger
 
 log = get_logger(__name__)
 

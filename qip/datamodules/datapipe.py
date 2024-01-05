@@ -1,11 +1,11 @@
 # base classes
-from admet_prediction.datamodules.collaters import DefaultCollater
-from admet_prediction.datamodules.transforms import TransformBase
-from admet_prediction.datamodules.featurizers import FeaturizerBase
+from qip.datamodules.collaters import DefaultCollater
+from qip.datamodules.transforms import TransformBase
+from qip.datamodules.featurizers import FeaturizerBase
 
 from collections import namedtuple
-from admet_prediction.utils.misc import _type_error_print_format
-from admet_prediction.typing import Data, Optional, Any, Batch, Callable, Union, Iterable
+from qip.utils.misc import _type_error_print_format
+from qip.typing import Data, Optional, Any, Batch, Callable, Union, Iterable
 
 
 class DataPipeline(namedtuple("DataPipeline", ["featurizer", "collater", "pre_transform", "transform"])):

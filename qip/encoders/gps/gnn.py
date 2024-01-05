@@ -9,7 +9,7 @@ from torch_geometric.nn.conv import (
     MessagePassing,
 )
 import torch_geometric.nn as pyg_nn
-from admet_prediction.encoders.gps.encoders import AtomEncoder, EdgeEncoder
+from qip.encoders.gps.encoders import AtomEncoder, EdgeEncoder
 import torch.nn as nn
 import torch
 

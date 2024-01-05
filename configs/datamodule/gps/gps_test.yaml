@@ -1,7 +1,0 @@
-# @package datamodule
-
-defaults:
-  - gps/multidata_default.yaml
-  - gps/dataset_configs:
-      - "CYP/1A2/v2_0_0"
-      - "CYP/2C9/v2_0_0"

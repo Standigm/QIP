@@ -7,7 +7,7 @@ import numpy as np
 from pathlib import Path
 from rdkit import Chem
 
-from admet_prediction.typing import ATOMTYPE, BONDTYPE, MOLTYPE, rdMol, OEMolBase, rdBond, OEBondBase, Data
+from qip.typing import ATOMTYPE, BONDTYPE, MOLTYPE, rdMol, OEMolBase, rdBond, OEBondBase, Data
 from collections import OrderedDict
 
 # TODO: this defaults is not used. but will be used for oechem

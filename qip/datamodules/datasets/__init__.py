@@ -1,4 +1,4 @@
-from admet_prediction.datamodules.datasets.molecule_graph import (
+from qip.datamodules.datasets.molecule_graph import (
     MoleculeGraphFromSMILESDataset,
     GroverGraphFromSMILESDataset
 )

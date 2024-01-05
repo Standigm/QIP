@@ -1,1 +1,1 @@
-from admet_prediction.systems.encoder_train_system import EncoderTrainSystem
+from qip.systems.encoder_train_system import EncoderTrainSystem

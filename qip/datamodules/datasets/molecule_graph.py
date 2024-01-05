@@ -15,19 +15,19 @@ from sklearn.model_selection import train_test_split
 
 from torch_geometric.data.dataset import files_exist, Dataset
 
-# from admet_prediction.datamodules.transforms.base import Compose
+# from qip.datamodules.transforms.base import Compose
 
 from tqdm import tqdm
 
-from admet_prediction.utils.misc import get_logger
-from admet_prediction.datamodules.featurizers import (
+from qip.utils.misc import get_logger
+from qip.datamodules.featurizers import (
     OGBFeaturizer,
     OGBOriginalFeaturizer,
     FeaturizerMixin,
     FeaturizerBase,
 )
-from admet_prediction.datamodules.transforms import Compose, TransformBase
-from admet_prediction.typing import PATH, Data
+from qip.datamodules.transforms import Compose, TransformBase
+from qip.typing import PATH, Data
 
 log = get_logger(__name__)
 

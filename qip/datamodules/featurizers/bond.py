@@ -1,6 +1,6 @@
 from openeye import oechem
-from admet_prediction.datamodules.featurizers.base import BondFeature, bond_feature_registry, safe_index
-from admet_prediction.typing import rdBond, OEBondBase, BONDTYPE
+from qip.datamodules.featurizers.base import BondFeature, bond_feature_registry, safe_index
+from qip.typing import rdBond, OEBondBase, BONDTYPE
 
 
 @bond_feature_registry.register(name="bond_type")

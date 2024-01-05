@@ -1,7 +1,6 @@
-from openeye import oechem
-from admet_prediction.datamodules.featurizers.base import AtomFeature, atom_feature_registry, safe_index
-from admet_prediction.typing import rdAtom, OEAtomBase, ATOMTYPE
-from admet_prediction.utils.molecule import ATOMNUM2GROUP, ATOMNUM2PERIOD
+from qip.datamodules.featurizers.base import AtomFeature, atom_feature_registry, safe_index
+from qip.typing import rdAtom, ATOMTYPE
+from qip.utils.molecule import ATOMNUM2GROUP, ATOMNUM2PERIOD
 
 
 @atom_feature_registry.register(name="atomic_num")
@@ -81,28 +80,9 @@ class GetAtomChiarlity(AtomFeature):
             return self.VALID_FEATURES.index(str(atom.GetChiralTag()))
         else:
             raise NotImplementedError(f"{self.__class__.__name__} is not implemented for {type(atom)}")
-            # TODO: implement here
-            neighbours = []
-            for nbr_atom in atom.GetAtoms():  # get neighbor atoms
-                neighbours.append(nbr_atom)
-            stereo = atom.GetStereo(neighbours, oechem.OEAtomStereo_Tetrahedral)
-
-            return stereo
+ 
 
 
-@atom_feature_registry.register(name="stereo")
-class GetAtomStereo(AtomFeature):
-    VALID_FEATURES = ()
-
-    def __call__(self, atom: oechem.OEAtomBase) -> int:
-        if isinstance(atom, rdAtom):
-            raise NotImplementedError(f"{self.__class__.__name__} is not implemented for {type(atom)}")
-        else:
-            v = []
-            for nbr in atom.GetAtoms():
-                v.append(nbr)
-            stereo = atom.GetStereo(v, oechem.OEAtomStereo_Tetrahedral)
-            raise NotImplementedError(f"{self.__class__.__name__} is not implemented for {type(atom)}")
 
 
 @atom_feature_registry.register(name="degree")
@@ -128,11 +108,11 @@ class GetAtomFormalCharge(AtomFeature):
 class GetAtomNumH(AtomFeature):
     VALID_FEATURES = tuple([0, 1, 2, 3, 4, 5, 6, 7, 8])
 
-    def __call__(self, atom: oechem.OEAtomBase) -> int:
+    def __call__(self, atom: rdAtom) -> int:
         if isinstance(atom, rdAtom):
             return safe_index(self.VALID_FEATURES, atom.GetTotalNumHs())
         else:
-            return safe_index(self.VALID_FEATURES, atom.GetTotalHCount())
+            raise NotImplementedError(f"{self.__class__.__name__} is not implemented for {type(atom)}")
 
 
 @atom_feature_registry.register(name="num_radical_e")
@@ -211,19 +191,6 @@ class GetAtomValence(AtomFeature):
             raise NotImplementedError(f"{self.__class__.__name__} is not implemented for {type(atom)}")
             return atom.GetValence()
 
-
-# TODO: isotopic mass, partial charge 미리 알고리즘따라 MolBase 생성시 Set해줘야함.
-"""
-@atom_features.register(name='isotopicmass')
-class AtomGetIsotopicMass(Feature):
-    def __call__(self, atom: oechem.OEAtomBase) -> int:
-        return atom.GetIsotope()
-
-@atom_features.register(name='partialcharge')
-class AtomGetPartialCharge(Feature):
-    def __call__(self, atom: oechem.OEAtomBase) -> float:
-        return atom.GetPartialCharge()
-"""
 
 
 @atom_feature_registry.register(name="implicitnumH")

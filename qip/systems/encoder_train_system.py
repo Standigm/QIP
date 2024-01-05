@@ -21,9 +21,9 @@ from omegaconf import DictConfig
 from torch import ScriptModule
 from torch.nn.modules.module import _IncompatibleKeys
 
-from admet_prediction.datamodules.multi import MultiDataModule
-from admet_prediction.systems.train_system import TrainSystem
-from admet_prediction.typing import (
+from qip.datamodules.multi import MultiDataModule
+from qip.systems.train_system import TrainSystem
+from qip.typing import (
     PATH,
     Any,
     Callable,
@@ -35,7 +35,7 @@ from admet_prediction.typing import (
     Iterable,
     LONGTARGETMETRICS,
 )
-from admet_prediction.utils.misc import get_logger, warn_once, get_func_signature
+from qip.utils.misc import get_logger, warn_once, get_func_signature
 from torch.distributed.fsdp.wrap import wrap
 
 from lightning.pytorch.strategies import FSDPStrategy
@@ -456,47 +456,6 @@ class EncoderTrainSystem(TrainSystem):
             return task_outputs, encoder_outputs
 
     def training_step(self, batch, batch_idx, *args, **kwargs) -> Any:
-        # task_outputs, encoder_outputs = self(batch)
-        # total_train_loss = 0.0
-        # for dataset_name, task_name in random.sample(list(zip(self.dataset_names, self.task_names)), len(self.dataset_names)):
-            
-        #     loss_fn = self.task_losses[task_name]
-        #     y = batch[dataset_name].y  # batch from CombinedLoader
-        #     mask = getattr(batch[dataset_name], "y_mask", ~torch.isnan(y))
-        #     preds_list, target_list = self.get_masked_preds_and_target(task_outputs[dataset_name][task_name], y, mask)
-
-        #     each_train_loss = 0.0
-        #     for preds, target in zip(*(preds_list, target_list)):
-        #         # average over subtasks
-        #         each_train_loss += self.compute_loss(loss_fn, preds, target) / float(len(preds_list))
-
-        #     # log each train_loss without loss weight
-        #     self.log(
-        #         self.format_log_title("train", "loss", task_name, dataset_name),
-        #         each_train_loss,
-        #         prog_bar=False,
-        #         sync_dist=True,
-        #     )
-        #     # add each_train_loss with corresponding task_weight
-        #     each_train_loss = self.task_loss_weights[task_name] * each_train_loss
-            
-        #     # manual optimization
-        #     if not self.automatic_optimization:
-        #         self.manual_optimization_step(each_train_loss, batch_idx)
-        #     total_train_loss += each_train_loss
-        # # weighted total loss over multiple tasks(datasets)
-        # self.log(
-        #     self.format_log_title("train", "loss"),
-        #     total_train_loss,
-        #     prog_bar=True,
-        #     sync_dist=True,
-        # )
-        # # # manual optimization
-        # # if not self.automatic_optimization:
-        # #     self.manual_optimization_step(total_train_loss, batch_idx)
-
-        # return total_train_loss
-
         task_outputs, encoder_outputs = self(batch)
 
         total_train_loss = 0.0
@@ -705,55 +664,55 @@ class EncoderTrainSystem(TrainSystem):
 
         return EncoderTaskOutput(encoder_outputs=encoder_outputs, task_outputs=task_outputs, batch_idx=batch_idx)
 
-    def to_torch(self, file_path: Optional[PATH] = None, **kwargs: Any) -> Dict:
-        file_path = Path(file_path) if file_path else None
-        outputs = dict()
+    # def to_torch(self, file_path: Optional[PATH] = None, **kwargs: Any) -> Dict:
+    #     file_path = Path(file_path) if file_path else None
+    #     outputs = dict()
 
-        # encoder
-        outputs["encoder"] = dict(state_dict=self.encoder.state_dict(), encoder_configs=self.hparams.encoder_config)
+    #     # encoder
+    #     outputs["encoder"] = dict(state_dict=self.encoder.state_dict(), encoder_configs=self.hparams.encoder_config)
 
-        # task_heads
-        outputs["task_heads"] = dict()
-        for task_name in self.task_names:
-            outputs["task_heads"][task_name] = dict(
-                state_dict=self.task_heads[task_name].state_dict(),
-                task_head_config=self.hparams.task_head_configs[task_name],
-            )
+    #     # task_heads
+    #     outputs["task_heads"] = dict()
+    #     for task_name in self.task_names:
+    #         outputs["task_heads"][task_name] = dict(
+    #             state_dict=self.task_heads[task_name].state_dict(),
+    #             task_head_config=self.hparams.task_head_configs[task_name],
+    #         )
 
-        if file_path is not None:
-            file_path = Path(file_path)
-            os.makedirs(file_path.parent, exist_ok=True)
-            save(outputs, file_path)
-        return outputs
+    #     if file_path is not None:
+    #         file_path = Path(file_path)
+    #         os.makedirs(file_path.parent, exist_ok=True)
+    #         save(outputs, file_path)
+    #     return outputs
 
-    def to_torchscript(
-        self, file_path: Optional[PATH] = None, method: Optional[str] = "script", **kwargs: Any
-    ) -> Union[ScriptModule, Dict[str, ScriptModule]]:
-        outputs = dict()
+    # def to_torchscript(
+    #     self, file_path: Optional[PATH] = None, method: Optional[str] = "script", **kwargs: Any
+    # ) -> Union[ScriptModule, Dict[str, ScriptModule]]:
+    #     outputs = dict()
 
-        # encoder
-        scripted_encoder = self.encoder.to_torchscript(file_path=file_path, **kwargs)
-        outputs["encoder"] = scripted_encoder
+    #     # encoder
+    #     scripted_encoder = self.encoder.to_torchscript(file_path=file_path, **kwargs)
+    #     outputs["encoder"] = scripted_encoder
 
-        # task_heads
-        outputs["task_heads"] = dict()
-        for task_name in self.task_names:
-            scripted_task_head = self.task_heads[task_name].to_torchscript(None, method, None, **kwargs)
-            outputs["task_heads"][task_name] = scripted_task_head
+    #     # task_heads
+    #     outputs["task_heads"] = dict()
+    #     for task_name in self.task_names:
+    #         scripted_task_head = self.task_heads[task_name].to_torchscript(None, method, None, **kwargs)
+    #         outputs["task_heads"][task_name] = scripted_task_head
 
-        if file_path is not None:
-            file_path = Path(file_path)
-            os.makedirs(file_path.parent, exist_ok=True)
-            save(outputs, file_path)
-        return outputs
+    #     if file_path is not None:
+    #         file_path = Path(file_path)
+    #         os.makedirs(file_path.parent, exist_ok=True)
+    #         save(outputs, file_path)
+    #     return outputs
 
-    def to_onnx(self, file_dir: PATH, **kwargs: Any) -> None:
-        file_dir = Path(file_dir)
-        encoder_file_path = file_dir / "onnx" / "encoder.pt"
-        os.makedirs(encoder_file_path.parent, exist_ok=True)
-        os.makedirs(encoder_file_path.parent / "task_heads", exist_ok=True)
-        self.encoder.to_onnx(encoder_file_path, None, **kwargs)
-        for task_name, task_head_path in [
-            (task_name, file_dir / "onnx" / "task_heads" / f"{task_name}.pt") for task_name in self.task_names
-        ]:
-            self.task_heads[task_name].to_onnx(task_head_path, None, **kwargs)
+    # def to_onnx(self, file_dir: PATH, **kwargs: Any) -> None:
+    #     file_dir = Path(file_dir)
+    #     encoder_file_path = file_dir / "onnx" / "encoder.pt"
+    #     os.makedirs(encoder_file_path.parent, exist_ok=True)
+    #     os.makedirs(encoder_file_path.parent / "task_heads", exist_ok=True)
+    #     self.encoder.to_onnx(encoder_file_path, None, **kwargs)
+    #     for task_name, task_head_path in [
+    #         (task_name, file_dir / "onnx" / "task_heads" / f"{task_name}.pt") for task_name in self.task_names
+    #     ]:
+    #         self.task_heads[task_name].to_onnx(task_head_path, None, **kwargs)

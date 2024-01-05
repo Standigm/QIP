@@ -13,8 +13,8 @@ from rdkit.Chem.rdchem import Bond as rdBond
 from openeye.oechem import OEAtomBase, OEBondBase, OEMolBase
 
 # containers
-from admet_prediction.typing.containers import TripletDataContainer
-from admet_prediction.typing.outputs import EncoderTaskOutput
+from qip.typing.containers import TripletDataContainer
+from qip.typing.outputs import EncoderTaskOutput
 
 from torchmetrics.classification import BinaryAveragePrecision, MulticlassAUROC, MulticlassAveragePrecision, MulticlassAccuracy
 

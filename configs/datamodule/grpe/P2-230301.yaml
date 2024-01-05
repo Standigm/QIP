@@ -1,7 +1,0 @@
-# @package datamodule
-
-defaults:
-  - multidata.yaml
-  - dataset_configs:
-      - "PubChemQC/v1_0_0"
-      - "nablaDFT/v1_0_0"

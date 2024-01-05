@@ -1,6 +1,6 @@
 import torch
-from admet_prediction.encoders.gps.layers import GPSLayer
-from admet_prediction.encoders.gps.encoders import FeatureEncoder
+from qip.encoders.gps.layers import GPSLayer
+from qip.encoders.gps.encoders import FeatureEncoder
 import torch.nn as nn
 from omegaconf import DictConfig
 import lightning as L

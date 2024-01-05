@@ -3,8 +3,8 @@ from typing import Optional
 import numpy as np
 import torch
 
-from admet_prediction.datamodules.transforms.base import TransformBase
-from admet_prediction.typing import Data
+from qip.datamodules.transforms.base import TransformBase
+from qip.typing import Data
 
 
 class Cal3DdistanceGenerator(TransformBase):

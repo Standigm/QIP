@@ -1,9 +1,9 @@
 import torch
 import math
 import numpy as np
-from admet_prediction.typing import Data, Sequence
-from admet_prediction.datamodules.collaters.default import DefaultCollater
-from admet_prediction.datamodules.featurizers.ogb import OGBFeaturizer
+from qip.typing import Data, Sequence
+from qip.datamodules.collaters.default import DefaultCollater
+from qip.datamodules.featurizers.ogb import OGBFeaturizer
 
 
 class GroverCollater(DefaultCollater):

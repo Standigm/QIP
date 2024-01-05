@@ -3,9 +3,9 @@ from collections import namedtuple
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import torch
-from admet_prediction.typing import OptTensor, Batch, Data
+from qip.typing import OptTensor, Batch, Data
 
-from admet_prediction.utils.misc import _type_error_print_format
+from qip.utils.misc import _type_error_print_format
 
 
 class Output(object):
@@ -23,11 +23,6 @@ class EncoderTaskOutput(Output, namedtuple("EncoderTaskOutput", ["encoder_output
     ) -> "EncoderTaskOutput":
         if isinstance(encoder_outputs, Mapping):
             pass
-            # for title, output in encoder_outputs.items():
-            #     if not isinstance(output, torch.Tensor):
-            #         raise TypeError(
-            #             _type_error_print_format(task_outputs, f"encoder_outputs[{title}]", "torch.Tensor")
-            #         )
         else:
             raise TypeError(_type_error_print_format(task_outputs, "encoder_outputs", "Mapping"))
         
