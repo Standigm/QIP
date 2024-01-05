@@ -34,7 +34,7 @@ def inference(config: DictConfig):
             config.checkpoint_path = config.system.checkpoint_path
 
         if not osp.isfile(config.checkpoint_path):
-            raise ValueError("config.checkpoint_paht is invalid: {config.checkpoint_path}")
+            raise ValueError(f"config.checkpoint_paht is invalid: {config.checkpoint_path}")
 
     # set batch_size to 1
     if config.datamodule.batch_size != 1:

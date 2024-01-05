@@ -354,8 +354,6 @@ class TrainSystem(L.LightningModule):
     @staticmethod
     def compute_loss(loss_fn: Callable, pred: torch.Tensor, target: torch.Tensor):
         if isinstance(loss_fn, nn.CrossEntropyLoss):
-            # pred: (B, C), target: (B, )
-            # TODO: Error when batch_size == 1 ?
             loss = loss_fn(pred, target.long().reshape(pred.shape[0]))
         elif isinstance(loss_fn, nn.BCEWithLogitsLoss):
             loss = loss_fn(pred, target.float())

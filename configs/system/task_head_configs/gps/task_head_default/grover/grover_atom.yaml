@@ -2,7 +2,7 @@
 
 grover-atom:
   module:
-    _target_: admet_prediction.taskheads.grover.AtomVocabHead
+    _target_: qip.taskheads.grover.AtomVocabHead
     dim_emb: ${system.encoder_config.module.d_model}
     vocab_size: 11688 # number of targets
   loss:

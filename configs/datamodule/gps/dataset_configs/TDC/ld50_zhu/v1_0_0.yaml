@@ -3,7 +3,7 @@
 ld50_zhu:
   task_name: ld50_zhu
   dataset:
-    _target_: admet_prediction.datamodules.datasets.MoleculeGraphFromSMILESDataset
+    _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
     root: /db2/data/ADMET/data_final/data_refined/TDC/ld50_zhu
     raw_file_names:
       - testset_smiles.csv
@@ -12,14 +12,14 @@ ld50_zhu:
       - testset_labels.csv
       - trainset_labels.csv
     transform:
-      _target_: admet_prediction.datamodules.transforms.Compose
+      _target_: qip.datamodules.transforms.Compose
       transforms:
-        - _target_: admet_prediction.datamodules.transforms.standardizers.StandardizerFromStatFile
+        - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
           statistics_file: /db2/data/ADMET/data_final/data_refined/TDC/ld50_zhu/raw/stats.pt
     pre_transform:
-      _target_: admet_prediction.datamodules.transforms.Compose
+      _target_: qip.datamodules.transforms.Compose
       transforms:
-        - _target_: admet_prediction.datamodules.transforms.RandomWalkGenerator
+        - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]
           space_dim: 0
   split_dict_name: "split_dict.pt"

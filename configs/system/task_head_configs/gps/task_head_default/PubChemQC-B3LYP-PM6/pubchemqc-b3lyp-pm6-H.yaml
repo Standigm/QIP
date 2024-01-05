@@ -2,7 +2,7 @@
 
 pubchemqc-b3lyp-pm6-h:
   module:
-    _target_: admet_prediction.taskheads.gps.SANGraphHead
+    _target_: qip.taskheads.gps.SANGraphHead
     in_features: ${system.encoder_config.module.d_model}
     out_features: 1 # number of targets
     bias: True

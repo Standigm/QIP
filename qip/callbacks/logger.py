@@ -3,8 +3,6 @@ from typing import Iterable
 from lightning.pytorch import Trainer
 from lightning.pytorch.loggers import (
     CSVLogger,
-    Logger,
-    MLFlowLogger,
     TensorBoardLogger,
     WandbLogger,
 )
@@ -27,25 +25,6 @@ def get_csv_logger(trainer: Trainer) -> CSVLogger:
                 return logger
 
     raise Exception("You are using wandb related callback, but WandbLogger was not found for some reason...")
-
-
-def get_mlflow_logger(trainer: Trainer) -> MLFlowLogger:
-    """Safely get Mlflow logger from Trainer."""
-
-    if trainer.fast_dev_run:
-        raise Exception(
-            "Cannot use mlflow callbacks since pytorch lightning disables loggers in `fast_dev_run=true` mode."
-        )
-
-    if isinstance(trainer.logger, MLFlowLogger):
-        return trainer.logger
-
-    if isinstance(trainer.logger, Iterable):
-        for logger in trainer.logger:
-            if isinstance(logger, MLFlowLogger):
-                return logger
-
-    raise Exception("You are using mlflow related callback, but MLFlowLogger was not found for some reason...")
 
 
 def get_tensorboard_logger(trainer: Trainer) -> TensorBoardLogger:

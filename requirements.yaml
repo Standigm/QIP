@@ -37,17 +37,12 @@ dependencies:
       - ogb
       - python-dotenv
       - wandb
-      - mlflow
-      - onnx~=1.13.1
       - pre-commit
       - isort
       - black
       - pytest
       - transformers~=4.27.4
-      - selfies~=2.1.1
       - torchmetrics
-      - deepspeed
       - loguru
       - boto3
-      - fastapi[all]
-      - async-lru
+      - PyTDC

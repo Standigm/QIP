@@ -13,7 +13,7 @@ import torch
 from lightning.pytorch.utilities.types import _METRIC, STEP_OUTPUT
 from sklearn.model_selection import train_test_split
 
-from torch_geometric.data.dataset import files_exist, Dataset
+from torch_geometric.data.dataset import Dataset
 
 # from qip.datamodules.transforms.base import Compose
 
@@ -22,7 +22,6 @@ from tqdm import tqdm
 from qip.utils.misc import get_logger
 from qip.datamodules.featurizers import (
     OGBFeaturizer,
-    OGBOriginalFeaturizer,
     FeaturizerMixin,
     FeaturizerBase,
 )
@@ -272,9 +271,7 @@ class MoleculeGraphFromSMILESDataset(Dataset, FeaturizerMixin):
                 f"delete '{self.processed_dir}' first"
             )
 
-        # takes too much time for check existance of all files..
-        # if files_exist(tqdm(self.processed_paths, desc='check_files:')):  # pragma: no cover
-        #     return
+   
         if not self.check:
             if osp.isdir(Path(self.processed_dir)) and any(
                 Path(self.processed_dir).iterdir()
@@ -495,8 +492,8 @@ class GroverGraphFromSMILESDataset(MoleculeGraphFromSMILESDataset):
             output = "%s_%s%d" % (output, k, nei[k])
         return output
 
-    @staticmethod
-    def random_mask(labels):
+
+    def random_mask(self, labels):
         percent = 0.85
         n_mask = math.ceil(len(labels)*percent)
         perm = np.random.permutation(len(labels))[:n_mask]
@@ -584,8 +581,8 @@ class GroverGraphFromSMILESDataset(MoleculeGraphFromSMILESDataset):
     def get(self, idx: int) -> Data:
         r"""Gets the data object at index :obj:`idx`."""
         sample_data = torch.load(osp.join(self.processed_dir, self.processed_file_names[idx]))
-        sample_data.av_targets = random_mask(sample_data.av_targets)
-        sample_data.bv_tagrtes = random_mask(sample_data.bv_targets)
+        sample_data.av_targets = self.random_mask(sample_data.av_targets)
+        sample_data.bv_tagrtes = self.random_mask(sample_data.bv_targets)
         return sample_data
 
 

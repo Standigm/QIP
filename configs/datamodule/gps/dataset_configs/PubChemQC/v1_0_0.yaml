@@ -3,18 +3,18 @@
 pubchemqc:
   task_name: pubchemqc
   dataset:
-    _target_: admet_prediction.datamodules.datasets.MoleculeGraphFromSMILESDataset
+    _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
     root: /db2/data/ADMET/data_final/data_fixed/pubchemqc/
     raw_file_names: smiles.csv
     raw_label_file_names: labels.csv
     transform:
-      _target_: admet_prediction.datamodules.transforms.Compose
+      _target_: qip.datamodules.transforms.Compose
       transforms:
-        - _target_: admet_prediction.datamodules.transforms.RandomWalkGenerator
+        - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]
           space_dim: 0
-        - _target_: admet_prediction.datamodules.transforms.standardizers.StandardizerFromStatFile
+        - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
           statistics_file: "/db2/data/ADMET/data_final/data_fixed/pubchemqc/raw/stats.pt"
-        - _target_: admet_prediction.datamodules.transforms.NanToNum
+        - _target_: qip.datamodules.transforms.NanToNum
   split_dict_name: null
   split_val: True

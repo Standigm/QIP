@@ -43,7 +43,7 @@ system:
         # modules: null # null or '' for all module parameters
       # lr_scheduler:
       #   scheduler:
-      #     _target_: admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
+      #     _target_: qip.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
       #     T_0: 300_000
       #     T_mult: null
       #     eta_max: 6e-5
