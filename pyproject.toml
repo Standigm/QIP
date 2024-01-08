@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Quantum Informed"
+name = "qip"
 version = "1.0.0"
 description = "QIP"
 readme = "README.md"
@@ -11,7 +11,7 @@ authors = [
     { name = "Jungwoo Kim", email = "jungwoo.kim@standigm.com" },
     { name = "Woonggi Chang", email = "woonggi.chang@standigm.com" },
     { name = "Hyunjun Ji", email = "hyunjun.ji@standigm.com" },
-    { name = "Insuk Joung", email = insuk.joung@standigm.com}
+    { name = "Insuk Joung", email = "insuk.joung@standigm.com" }
 ]
 keywords = ["python"]
 requires-python = ">=3.8"

@@ -6,7 +6,7 @@ defaults:
   # system config
   - /system/encoder_config: "gps/medium.yaml"
   - /system/task_head_configs: gps/MT0.yaml
-  - /system/optimizer_configs: lr_t1.yaml
+  - /system/optimizer_configs: paper_finetuning.yaml
   # train config
   - override /trainer:
       [
