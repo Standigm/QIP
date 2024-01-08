@@ -18,7 +18,7 @@ class AtomVocabHead(nn.Module):
         self.projection = nn.Linear(dim_emb, vocab_size)
         self.logsoftmax = nn.LogSoftmax(dim = 1)
 
-    def forward(self, x, batch, features=None):
+    def forward(self, x, batch, **kwargs):
         x = self.projection(x)
         x = self.logsoftmax(x)
         return x
@@ -36,7 +36,7 @@ class FunctionalGroupHead(nn.Module):
         self.projection = nn.Linear(dim_emb, fg_size)
 
 
-    def forward(self, x, batch, features=None):
+    def forward(self, x, batch, **kwargs):
         x = self.readout(x, batch)
         x = self.projection(x)
         return x

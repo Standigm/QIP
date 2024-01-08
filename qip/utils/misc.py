@@ -76,6 +76,11 @@ def print_config(
     with open("config_tree.txt", "w") as fp:
         rich.print(tree, file=fp)
 
+
+def empty(*args, **kwargs):
+    pass
+
+
 def finish(
     config: DictConfig,
     model: L.LightningModule,

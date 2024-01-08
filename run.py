@@ -18,10 +18,9 @@ def main(config: DictConfig):
     # Imports should be nested inside @hydra.main to optimize tab completion
     # Read more here: https://github.com/facebookresearch/hydra/issues/934
     import qip
-    from qip.deployment import deployment
-    from qip.inference import inference
     from qip.test import test
     from qip.train import train
+    from qip.inference import inference
     from qip.utils.misc import print_config
 
     # print hostname
