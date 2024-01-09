@@ -1,0 +1,65 @@
+# @package _global_
+
+defaults:
+  - /system: encoder_train.yaml
+  # override
+  # system config
+  - /system/encoder_config: "gps/medium.yaml"
+  - /system/task_head_configs: gps/task_head_default/TDC/bbb_martins.yaml
+  - /system/optimizer_configs: null
+  # train config
+  - override /trainer:
+      [
+        "default",
+        "accelerator/gpu",
+        "devices/2",
+        "max_steps/2k",
+        "accumulate_grad_batches/4",
+      ]
+
+  - override /callbacks: default.yaml
+  - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/bbb_martins/v1_0_0.yaml]
+  - override /logger: ["csv"]
+
+trainer:
+  devices: 1
+  max_epochs: 5
+  max_steps: -1
+  accumulate_grad_batches: 1
+  log_every_n_steps: 2
+  val_check_interval: 2
+datamodule:
+  batch_size: 1
+  split_val: False
+
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+name: inference_test
+seed: 8282
+mode: inference
+checkpoint_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_FTHAD_lr_equal_prev_8272/bbb_martins/2023-10-23/18-55-11/checkpoints/checkpoint_000000022.ckpt
+system:
+  #checkpoint_path: /db2/users/jungwooddkim/projects/admet_prediction/outputs/train/runs/gps_FT_Dacon_only_mlm/2023-08-24/23-04-08/checkpoints/checkpoint_000000290.ckpt
+
+
+  task_head_configs:
+    dacon-human-avg:
+      weight: 1
+
+  # optimizer_configs:
+  #   - optimizer:
+  #       _target_: torch.optim.AdamW
+  #       lr: 5e-7 # use very small lr with CosineAnnealingWarmUpRestartsWithDecay
+  #       # params: null # null or '' for all parameters
+  #       # modules: null # null or '' for all module parameters
+  #     lr_scheduler:
+  #       scheduler:
+  #         _target_: admet_prediction.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
+  #         T_0: 10_000
+  #         T_mult: null
+  #         eta_max: 3e-4
+  #         T_up: 0
+  #         gamma: 1.0
+  #       interval: "step"
+  #       frequency: 1

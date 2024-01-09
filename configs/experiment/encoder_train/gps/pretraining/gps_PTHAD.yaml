@@ -6,7 +6,7 @@ defaults:
   # system config
   - /system/encoder_config: "gps/medium.yaml"
   - /system/task_head_configs: gps/PTHAD.yaml
-  - /system/optimizer_configs: null
+  - /system/optimizer_configs: "paper_pretraining.yaml"
   # train config
   - override /trainer:
       [
@@ -20,34 +20,15 @@ defaults:
       ]
   - override /callbacks: default.yaml
   - override /datamodule: "gps/PTHAD.yaml"
-  - override /logger: ["csv", "wandb"]
+  - override /logger: ["csv"]
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 trainer:
-  #strategy: ddp_find_unused_parameters_true
   log_every_n_steps: 256
   val_check_interval: 256
   max_epochs: 5
 datamodule:
   batch_size: 768
-name: gps_PTHAD
-seed: 8282
-system:
-  optimizer_configs:
-    - optimizer:
-        _target_: torch.optim.AdamW
-        lr: 1e-5 # use very small lr with CosineAnnealingWarmUpRestartsWithDecay
-        # params: null # null or '' for all parameters
-        # modules: null # null or '' for all module parameters
-      lr_scheduler:
-        scheduler:
-          _target_: qip.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
-          T_0: 50_000
-          T_mult: null
-          eta_max: 2e-4
-          T_up: 5000
-          gamma: 1.0
-          warmup_base_lr: 0.0
-        interval: "step"
-        frequency: 1
+name: gps_HAD_pretraining
+seed: 8272

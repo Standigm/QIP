@@ -139,6 +139,91 @@ def smiles2graph(smiles):
     )
     return data
 
+from typing import AbstractSet, Mapping, Sequence, Union, Callable, Optional, Any, List, Container
+import abc
+
+import torch
+import numpy as np
+
+from pathlib import Path
+from rdkit import Chem
+
+from qip.typing import ATOMTYPE, BONDTYPE, MOLTYPE, rdMol, OEMolBase, rdBond, OEBondBase, Data
+from collections import OrderedDict
+
+def _default_rdkit_input_parser(smiles_or_path: str):
+    if isinstance(smiles_or_path, str):
+        try:
+            path = Path(smiles_or_path)
+            is_path = path.is_dir() or path.is_file()
+        except OSError:
+            is_path = False
+
+        if is_path:
+            # if given input is file
+            raise NotImplementedError(f"Input_parser for {str(path)} is not implemented")
+        else:
+            mol = Chem.MolFromSmiles(smiles_or_path)
+    else:
+        raise ValueError(f"Invalid smiles_or_path type: {type(smiles_or_path)}")
+    return mol
+
+
+class FeaturizerBase(abc.ABC):
+    @abc.abstractmethod
+    def featurize(self, mol: MOLTYPE) -> Data:
+        """convert mol object to Data object"""
+
+    @property
+    def input_parser(self) -> Callable[[str], MOLTYPE]:
+        return getattr(self, "_input_parser", _default_rdkit_input_parser)
+
+    @input_parser.setter
+    def input_parser(self, parser_func: Optional[Callable]):
+        if parser_func is None:
+            return _default_rdkit_input_parser
+        elif isinstance(parser_func, Callable):
+            self._input_parser = parser_func
+        else:
+            raise ValueError(f"input_parser should be Callable Object but got {type(parser_func)}")
+
+    @property
+    def preprocess(self) -> Optional[Callable[[MOLTYPE], MOLTYPE]]:
+        return getattr(self, "_preprocess", None)
+
+    @preprocess.setter
+    def preprocess(self, preprocess_fn: Optional[Callable]):
+        if preprocess_fn is None:
+            return None
+        elif isinstance(preprocess_fn, Callable):
+            self._preprocess = preprocess_fn
+        else:
+            raise ValueError(f"preprocess should be Callable Object but got {type(preprocess_fn)}")
+
+    def __call__(self, smiles_or_path: str) -> Data:
+        mol = self.input_parser(smiles_or_path)
+        mol = self.preprocess(mol) if self.preprocess is not None else mol
+        data = self.featurize(mol)
+        return data
+
+    def __repr__(self) -> str:
+        _attributes = sorted([(k, v) for k, v in self.__dict__.items() if not k.startswith("_")], key=lambda x: x[0])
+        fields = [f"{k}={v}" for (k, v) in _attributes]
+        return self.__class__.__name__ + "(" + ", ".join(fields) + ")"
+
+
+class QIPFeaturizer(FeaturizerBase):
+    def featurize(self, mol: MOLTYPE) -> Data:
+        smiles = Chem.MolToSmiles(mol)
+        graph = smiles2graph(smiles)
+
+        return Data(
+            x=torch.from_numpy(graph["node_feat"]),
+            edge_index=torch.from_numpy(graph["edge_index"]),
+            edge_attr=torch.from_numpy(graph["edge_feat"]),
+        )
+
+
 
 
 # periodic table mapping

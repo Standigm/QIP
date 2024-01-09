@@ -2,7 +2,7 @@
 
 module:
   _target_: qip.encoders.gps.model.GPSEncoder
-  d_model: 384 # encoder_config의 dim_emb와 같은 값, nhead의 배수
+  d_model: 384 
   nhead: 16
   dropout: 0.1
   attention_dropout: 0.1
@@ -15,12 +15,11 @@ module:
     node_config:
       dim_in: 1
       dim_posenc: 20
-      dim_emb: 384 # layer_config의 dim_emb와 같은 값, nhead의 배수
-      ksteps: [1,17] # datamodule/gps/datastconfigs에서 ksteps와 동일하게 맞춰야함.
+      dim_emb: 384 
+      ksteps: [1,17] 
       expand_x: False
       batch_norm: False
     edge_config:
-      dim_emb: 384 # layer_config의 dim_emb와 같은 값, nhead의 배수
+      dim_emb: 384 
       batch_norm: False
-
 state_path: null
