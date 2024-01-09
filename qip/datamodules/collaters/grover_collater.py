@@ -3,7 +3,7 @@ import math
 import numpy as np
 from qip.typing import Data, Sequence
 from qip.datamodules.collaters.default import DefaultCollater
-from qip.datamodules.featurizers.ogb import OGBFeaturizer
+from qip.datamodules.featurizers import QIPFeaturizer
 
 
 class GroverCollater(DefaultCollater):
@@ -16,7 +16,7 @@ class GroverCollater(DefaultCollater):
             ],
         )
         self.max_num_nodes = max_num_nodes
-        self.featurizer = OGBFeaturizer()
+        self.featurizer = QIPFeaturizer()
         self.masked_features = torch.LongTensor(self.featurizer.get_atom_feature_dims())
         self.masked_edge_attr = torch.LongTensor(self.featurizer.get_bond_feature_dims())
 
