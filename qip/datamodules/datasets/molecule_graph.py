@@ -410,7 +410,7 @@ class GroverGraphFromSMILESDataset(MoleculeGraphFromSMILESDataset):
         pre_transform: Optional[TransformBase] = None,
         pre_filter: Optional[Callable] = None,
         chunksize: int = 10000,
-        featurizer: FeaturizerBase = OGBFeaturizer(),
+        featurizer: FeaturizerBase = QIPFeaturizer(),
         # featurizer: FeaturizerBase = OGBOriginalFeaturizer(),
         check: bool = False,
         atom_vocab = '/db2/data/ADMET/data_final/data_refined/grover/raw/vocab/atom_vocab.pkl',

@@ -1,13 +1,13 @@
 import torch
 import torch.nn as nn
 from typing import List
-from qip.datamodules.featurizers.ogb import OGBFeaturizer
+from qip.datamodules.featurizers import ATOM_FEATURES_DIM, BOND_FEATURES_DIM
 from omegaconf import DictConfig
 import lightning as L
 
-ogb_feat = OGBFeaturizer()
-full_atom_feature_dims = ogb_feat.get_atom_feature_dims()
-full_bond_feature_dims = ogb_feat.get_bond_feature_dims()
+# ogb_feat = OGBFeaturizer()
+# full_atom_feature_dims = ogb_feat.get_atom_feature_dims()
+# full_bond_feature_dims = ogb_feat.get_bond_feature_dims()
 
 
 class AtomEncoder(nn.Module):
@@ -17,7 +17,7 @@ class AtomEncoder(nn.Module):
 
         self.atom_embedding_list = torch.nn.ModuleList()
 
-        for i, dim in enumerate(full_atom_feature_dims):
+        for i, dim in enumerate(ATOM_FEATURES_DIM):
             emb = torch.nn.Embedding(dim+1, dim_emb)
             torch.nn.init.xavier_uniform_(emb.weight.data)
             self.atom_embedding_list.append(emb)
@@ -131,7 +131,7 @@ class BondEncoder(nn.Module):
 
         self.bond_embedding_list = torch.nn.ModuleList()
 
-        for i, dim in enumerate(full_bond_feature_dims):
+        for i, dim in enumerate(BOND_FEATURES_DIM):
             emb = torch.nn.Embedding(dim+1, dim_emb)
             torch.nn.init.xavier_uniform_(emb.weight.data)
             self.bond_embedding_list.append(emb)
