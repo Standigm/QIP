@@ -87,6 +87,11 @@ class EncoderTrainSystem(TrainSystem):
         self.save_hyperparameters(logger=False)
 
         # load modules
+
+        print('='*50)
+        print('current path')
+        print(os.getcwd())
+        print('='*50)
         self.encoder: L.LightningModule = hydra.utils.instantiate(encoder_config.module)
         if encoder_config.get("state_path", None) is not None:
             log.info(f"encoder initialized from {encoder_config.get('state_path', None)}")

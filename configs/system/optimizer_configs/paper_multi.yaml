@@ -13,6 +13,5 @@
       eta_max: 3e-4
       T_up: 2000
       gamma: 1.0
-      warmup_base_lr: 0.0
     interval: "step"
     frequency: 1

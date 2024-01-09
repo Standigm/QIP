@@ -8,7 +8,7 @@ from qip.typing import OptTensor, Batch, Data
 from qip.utils.misc import _type_error_print_format
 
 
-class Output(object):
+class Output:
     __metaclass__ = abc.ABCMeta
 
 

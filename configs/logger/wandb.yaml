@@ -2,7 +2,7 @@
 
 wandb_logger:
   _target_: lightning.pytorch.loggers.wandb.WandbLogger
-  project: "ADMET_PROJECT"
+  project: "QIP"
   settings: 
     _target_: wandb.Settings
     start_method: fork
