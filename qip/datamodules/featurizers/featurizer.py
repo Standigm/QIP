@@ -305,6 +305,17 @@ class QIPFeaturizer(FeaturizerBase):
             edge_attr=torch.from_numpy(graph["edge_feat"]),
         )
 
+class FeaturizerMixin:
+    @property
+    def featurizer(self) -> Optional[FeaturizerBase]:
+        return getattr(self, "_featurizer", None)
+
+    @featurizer.setter
+    def featurizer(self, featurizer_obj: FeaturizerBase):
+        if isinstance(featurizer_obj, FeaturizerBase):
+            self._featurizer = featurizer_obj
+        else:
+            raise ValueError(f"Invalid featurizer type: {type(featurizer_obj)}")
 
 
 

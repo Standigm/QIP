@@ -21,7 +21,7 @@ from tqdm import tqdm
 
 from qip.utils.misc import get_logger
 from qip.datamodules.featurizers import (
-    OGBFeaturizer,
+    QIPFeaturizer,
     FeaturizerMixin,
     FeaturizerBase,
 )
@@ -47,7 +47,7 @@ class MoleculeGraphFromSMILESDataset(Dataset, FeaturizerMixin):
         pre_transform: Optional[TransformBase] = None,
         pre_filter: Optional[Callable] = None,
         chunksize: int = 10000,
-        featurizer: FeaturizerBase = OGBFeaturizer(),
+        featurizer: FeaturizerBase = QIPFeaturizer(),
         # featurizer: FeaturizerBase = OGBOriginalFeaturizer(),
         check: bool = False,
     ):

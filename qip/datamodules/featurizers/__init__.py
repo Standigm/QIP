@@ -7,4 +7,4 @@
 
 # from qip.datamodules.featurizers.ogb import OGBFeaturizer, OGBOriginalFeaturizer
 
-from qip.datamodules.featurizers.featurizer import ATOM_FEATURES_DIM, BOND_FEATURES_DIM, QIPFeaturizer
+from qip.datamodules.featurizers.featurizer import ATOM_FEATURES_DIM, BOND_FEATURES_DIM, QIPFeaturizer, FeaturizerMixin, FeaturizerBase
