@@ -28,17 +28,18 @@ callbacks:
   model_checkpoint:
     monitor: val/score
     mode: max
+    linkpath: ${model_dir}/multitask_weight
 trainer:
   accumulate_grad_batches: 1
   log_every_n_steps: 16
   val_check_interval: 16
 datamodule:
   batch_size: 24
-name: gps_MT_HAD_1_lr2
+name: gps_MT_HAD
 seed: 8272
 system:
   encoder_config:
 
-    state_path: saved_model/pretrained_weight_HAD.pt
+    state_path: ${model_dir}/pretrained_weight_HAD.pt
     frozen_modules:
       - encoder

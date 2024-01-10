@@ -34,5 +34,5 @@ exec_time: ${now:%Y-%m-%d}/${now:%H-%M-%S}
 seed: null
 
 # name of the run, accessed by loggers
-name: admet_project
-version: "v2.0.0"
+name: QIP
+version: "v1.0.0"

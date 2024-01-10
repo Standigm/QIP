@@ -11,6 +11,7 @@ model_checkpoint:
   dirpath: "${work_dir}/checkpoints/"
   filename: "checkpoint_{step:09d}"
   auto_insert_metric_name: False
+  linkpath: "${model_dir}"
   submodule_names:
     - encoder
     - task_heads

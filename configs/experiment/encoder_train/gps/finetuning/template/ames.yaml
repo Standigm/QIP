@@ -6,7 +6,7 @@ defaults:
   # system config
   - /system/encoder_config: "gps/medium.yaml"
   - /system/task_head_configs: gps/task_head_default/TDC/ames.yaml
-  - /system/optimizer_configs: lr_finetuning_t1.yaml
+  - /system/optimizer_configs: paper_finetuning.yaml
   # train config
   - override /trainer:
       [
@@ -19,11 +19,13 @@ defaults:
 
   - override /callbacks: default.yaml
   - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/ames/v1_0_0]
-  - override /logger: ["csv", "wandb"]
+  - override /logger: ["csv"]
 callbacks:
   model_checkpoint:
     monitor: val/BinaryAUROC/ames.ames
     mode: max
+    linkpath: ${model_dir}/finetuning/ames
+    
 trainer:
   devices: 1
   max_epochs: 5
@@ -34,15 +36,12 @@ trainer:
 datamodule:
   batch_size: 16
 
-logger:
-  wandb_logger:
-    project: "ADMET_finetuning"
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
-name: gps_PTNAME_finetuning_ames
+
 seed: 8252
 system:
-  checkpoint_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT_HD_2/2023-08-10/10-04-18/checkpoints/checkpoint_000003976.ckpt
+  checkpoint_path: ${model_dir}/multitask_weight
 
   frozen_modules: 
     - encoder

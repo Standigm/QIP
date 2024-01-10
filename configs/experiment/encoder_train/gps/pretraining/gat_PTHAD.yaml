@@ -20,7 +20,7 @@ defaults:
       ]
   - override /callbacks: default.yaml
   - override /datamodule: "gps/PTHAD.yaml"
-  - override /logger: ["csv", "wandb"]
+  - override /logger: ["csv"]
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
