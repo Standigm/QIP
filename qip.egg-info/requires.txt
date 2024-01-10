@@ -1,7 +1,0 @@
-
-[dev]
-pylint
-black
-isort
-pre-commit
-pytest

@@ -144,6 +144,10 @@ class EncoderTrainSystem(TrainSystem):
                 warnings.warn(f"task_head ({task_name}) module is not defined")
 
         # resume checkpoint if provided
+        
+        print("*"*50)
+        print(os.getcwd())
+        print("*"*50)
         if checkpoint_path is not None and isinstance(checkpoint_path, PATH):
             #prev_params = [(n,v.detach().clone()) for n,v in self.named_parameters()]
             checkpoint_dict = torch.load(checkpoint_path, map_location='cpu')

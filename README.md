@@ -19,7 +19,7 @@ You can execute specific configuration through experiment argument.
 python run.py experiment=<your_config_to_run>
 # example
 
-python run.py experiment=encoder_train/grpe/CYP+hERG+lipo+MS+perm+sol+nabla/initial
+python run.py experiment=encoder_train/gps/inference/inference_test.yaml seed=8272
 ```
 
 
