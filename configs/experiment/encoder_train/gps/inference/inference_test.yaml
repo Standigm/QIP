@@ -39,7 +39,7 @@ name: inference_test
 seed: 8282
 mode: inference
 #checkpoint_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_FTHAD_lr_equal_prev_8272/bbb_martins/2023-10-23/18-55-11/checkpoints/checkpoint_000000022.ckpt
-checkpoint_path: saved_model/finetuning_weight/bbb_martins.ckpt
+checkpoint_path: ${model_dir}/finetuning_weight/bbb_martins.ckpt
 system:
   task_head_configs:
     dacon-human-avg:
