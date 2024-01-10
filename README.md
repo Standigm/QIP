@@ -12,7 +12,6 @@ pip install -e .
 Configuration is implemented depending on omegaconf and hydra package. 
 You can refer to the contents of the corresponding package for instructions on how to use it.
 
-TODO: 수정해야됨.
 ## train process
 You can execute specific configuration through experiment argument.
 ```bash

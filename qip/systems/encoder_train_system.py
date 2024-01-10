@@ -88,10 +88,6 @@ class EncoderTrainSystem(TrainSystem):
 
         # load modules
 
-        print('='*50)
-        print('current path')
-        print(os.getcwd())
-        print('='*50)
         self.encoder: L.LightningModule = hydra.utils.instantiate(encoder_config.module)
         if encoder_config.get("state_path", None) is not None:
             log.info(f"encoder initialized from {encoder_config.get('state_path', None)}")
@@ -145,9 +141,6 @@ class EncoderTrainSystem(TrainSystem):
 
         # resume checkpoint if provided
         
-        print("*"*50)
-        print(os.getcwd())
-        print("*"*50)
         if checkpoint_path is not None and isinstance(checkpoint_path, PATH):
             #prev_params = [(n,v.detach().clone()) for n,v in self.named_parameters()]
             checkpoint_dict = torch.load(checkpoint_path, map_location='cpu')
