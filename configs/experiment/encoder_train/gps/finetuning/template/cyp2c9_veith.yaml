@@ -6,7 +6,7 @@ defaults:
   # system config
   - /system/encoder_config: "gps/medium.yaml"
   - /system/task_head_configs: gps/task_head_default/TDC/cyp2c9_veith.yaml
-  - /system/optimizer_configs: lr_finetuning_t1.yaml
+  - /system/optimizer_configs: paper_finetuning.yaml
   # train config
   - override /trainer:
       [
@@ -19,7 +19,7 @@ defaults:
 
   - override /callbacks: default.yaml
   - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/cyp2c9_veith/v1_0_0]
-  - override /logger: ["csv", "wandb"]
+  - override /logger: ["csv"]
 callbacks:
   model_checkpoint:
     monitor: val/BinaryAveragePrecision/cyp2c9_veith.cyp2c9_veith
@@ -33,9 +33,6 @@ trainer:
   val_check_interval: 2
 datamodule:
   batch_size: 16
-logger:
-  wandb_logger:
-    project: "ADMET_finetuning"
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 name: gps_PTNAME_finetuning_cyp2c9_veith
@@ -45,11 +42,6 @@ system:
 
   frozen_modules:
     - encoder
-
-
-  # encoder_config:
-  #   state_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT0/2023-07-24/12-25-37/checkpoints/checkpoint_000002820/encoder.pt
-
 
 
   task_head_configs:

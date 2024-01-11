@@ -19,7 +19,7 @@ defaults:
 
   - override /callbacks: default.yaml
   - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/ld50_zhu/v1_0_0]
-  - override /logger: ["csv", "wandb"]
+  - override /logger: ["csv"]
 callbacks:
   model_checkpoint:
     monitor: val/MeanAbsoluteError/ld50_zhu.ld50_zhu
@@ -33,9 +33,6 @@ trainer:
   val_check_interval: 2
 datamodule:
   batch_size: 16
-logger:
-  wandb_logger:
-    project: "ADMET_finetuning"
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 name: gps_PTNAME_finetuning_ld50_zhu
@@ -46,9 +43,6 @@ system:
   frozen_modules:
     - encoder
 
-
-  # encoder_config:
-  #   state_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT0/2023-07-24/12-25-37/checkpoints/checkpoint_000002820/encoder.pt
 
 
 

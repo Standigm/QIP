@@ -19,7 +19,7 @@ defaults:
 
   - override /callbacks: default.yaml
   - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/bbb_martins/v1_0_0]
-  - override /logger: ["csv", "wandb"]
+  - override /logger: ["csv"]
 callbacks:
   model_checkpoint:
     monitor: val/BinaryAUROC/bbb_martins.bbb_martins
@@ -34,9 +34,6 @@ trainer:
 datamodule:
   batch_size: 16
 
-logger:
-  wandb_logger:
-    project: "ADMET_finetuning"
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 name: gps_PTNAME_finetuning_bbb_martins
@@ -47,9 +44,6 @@ system:
   frozen_modules:
     - encoder
 
-
-  # encoder_config:
-  #   state_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT0/2023-07-24/12-25-37/checkpoints/checkpoint_000002820/encoder.pt
 
 
 

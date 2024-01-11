@@ -3,6 +3,7 @@ from collections import OrderedDict
 from datetime import timedelta
 from pathlib import Path
 from typing import List, Optional
+import os
 
 import lightning as L
 from lightning.pytorch.callbacks import ModelCheckpoint
@@ -25,6 +26,7 @@ class ModelCheckpointWithSubModules(ModelCheckpoint):
         save_weights_only: bool = False,
         mode: str = "min",
         auto_insert_metric_name: bool = True,
+        linkpath: str = None,
         every_n_train_steps: Optional[int] = None,
         train_time_interval: Optional[timedelta] = None,
         every_n_epochs: Optional[int] = None,
@@ -50,6 +52,7 @@ class ModelCheckpointWithSubModules(ModelCheckpoint):
         self.submodule_dirpath = Path(self.dirpath) if submodule_dirpath is None else Path(submodule_dirpath)
         self.submodule_names = submodule_names
         self.best_model_paths = OrderedDict()
+        self.linkpath = linkpath
 
     def on_fit_start(self, trainer: "L.Trainer", pl_module: "L.LightningModule") -> None:
         """When pretrain routine starts we build the submodule dir on the fly."""
@@ -65,6 +68,8 @@ class ModelCheckpointWithSubModules(ModelCheckpoint):
 
     def _save_best_submodules(self, trainer: "L.Trainer"):
         best_model_path = Path(self.best_model_path)
+        
+        os.symlink(best_model_path, self.linkpath)
 
         if best_model_path not in self.best_model_paths.keys():
             submodule_subdirpath = Path(self.submodule_dirpath) / best_model_path.stem

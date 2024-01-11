@@ -6,7 +6,7 @@ defaults:
   # system config
   - /system/encoder_config: "gps/gnn.yaml"
   - /system/task_head_configs: gps/MT0.yaml
-  - /system/optimizer_configs: paper_multi.yaml
+  - /system/optimizer_configs: paper_multitask.yaml
   # train config
   - override /trainer:
       [
@@ -20,7 +20,7 @@ defaults:
       ]
   - override /callbacks: default.yaml
   - override /datamodule: "gps/MT0.yaml"
-  - override /logger: ["csv", "wandb"]
+  - override /logger: ["csv"]
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
@@ -39,21 +39,3 @@ datamodule:
   batch_size: 24
 name: gps_MT0_gatv2
 seed: 8252
-# system:
-  # optimizer_configs:
-  #   - optimizer:
-  #       _target_: torch.optim.AdamW
-  #       lr: 1e-5 # use very small lr with CosineAnnealingWarmUpRestartsWithDecay
-  #       # params: null # null or '' for all parameters
-  #       # modules: null # null or '' for all module parameters
-  #     lr_scheduler:
-  #       scheduler:
-  #         _target_: qip.modules.lr_scheduler.CosineAnnealingWarmUpRestartsWithDecay
-  #         T_0: 10_000
-  #         T_mult: null
-  #         eta_max: 15e-5
-  #         T_up: 2000
-  #         gamma: 1.0
-  #         warmup_base_lr: 0.0
-  #       interval: "step"
-  #       frequency: 1
