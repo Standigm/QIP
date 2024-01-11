@@ -4,7 +4,7 @@ ld50_zhu:
   task_name: ld50_zhu
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/data/ADMET/data_final/data_refined/TDC/ld50_zhu
+    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/ld50_zhu
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv
@@ -15,10 +15,7 @@ ld50_zhu:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
-          statistics_file: /db2/data/ADMET/data_final/data_refined/TDC/ld50_zhu/raw/stats.pt
-    pre_transform:
-      _target_: qip.datamodules.transforms.Compose
-      transforms:
+          statistics_file: /db2/users/jungwookim/projects/QIP/datasets/admet_group/ld50_zhu/raw/stats.pt
         - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]
           space_dim: 0

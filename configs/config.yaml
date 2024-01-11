@@ -25,7 +25,7 @@ work_dir: ${hydra:runtime.output_dir}
 data_dir: ${curr_dir}/data/
 
 # path to folder with saved_model
-model_dir: ${curr_dir}/saved_model/
+model_dir: ${curr_dir}/saved_model
 
 # exec_time
 exec_time: ${now:%Y-%m-%d}/${now:%H-%M-%S}

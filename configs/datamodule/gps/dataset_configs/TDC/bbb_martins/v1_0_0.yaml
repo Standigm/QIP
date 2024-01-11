@@ -7,6 +7,10 @@ bbb_martins:
     root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/bbb_martins
     raw_file_names:
       - testset_smiles.csv
+      - trainset_smiles.csv
+    raw_label_file_names:
+      - testset_labels.csv
+      - trainset_labels.csv
     transform:
       _target_: qip.datamodules.transforms.Compose
       transforms:

@@ -11,7 +11,7 @@ grover-fg:
     raw_label_file_names:
       - tdc_fg.csv
       - pm6_fg.csv
-    pre_transform:
+    transform:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.RandomWalkGenerator

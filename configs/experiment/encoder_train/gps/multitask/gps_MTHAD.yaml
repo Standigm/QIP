@@ -11,7 +11,7 @@ defaults:
   - override /trainer:
       [
         "default",
-        "accelerator/gpu",
+        "accelerator/auto",
         "devices/4",
         "max_steps/10k",
         "strategy/ddp",

@@ -14,4 +14,4 @@ ppbr_az:
   state_path: null
   post_process:
     _target_: qip.datamodules.transforms.standardizers.RescaleFromStatFile
-    statistics_file: /db2/data/ADMET/data_final/data_refined/TDC/ppbr_az/raw/stats.pt
+    statistics_file: /db2/users/jungwookim/projects/QIP/datasets/admet_group/ppbr_az/raw/stats.pt

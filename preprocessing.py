@@ -1,3 +1,4 @@
+import torch
 from tdc import utils
 from tdc.benchmark_group import admet_group
 import os
@@ -16,6 +17,9 @@ def download_tdc():
         train = train.rename(columns={'Drug':'smiles', 'Y': 'labels'})
         train['smiles'].to_csv(f'./datasets/admet_group/{admet}/raw/trainset_smiles.csv',index=False)
         train['labels'].to_csv(f'./datasets/admet_group/{admet}/raw/trainset_labels.csv',index=False)
+        
+        if len(set(train['labels']))!=2:
+            torch.save({'means':[train['labels'].mean()], 'stds':[train['labels'].std()], 'targets':['labels']}, f'./datasets/admet_group/{admet}/raw/stats.pt')
         
         test = pd.read_csv(f'./datasets/admet_group/{admet}/test.csv')    
         test = test.rename(columns={'Drug':'smiles', 'Y': 'labels'})
