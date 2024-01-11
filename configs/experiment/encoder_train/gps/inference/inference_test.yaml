@@ -11,8 +11,7 @@ defaults:
   - override /trainer:
       [
         "default",
-        "accelerator/gpu",
-        "devices/2",
+        "accelerator/auto",
         "max_steps/2k",
         "accumulate_grad_batches/4",
       ]
