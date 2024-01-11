@@ -4,6 +4,7 @@ from datetime import timedelta
 from pathlib import Path
 from typing import List, Optional
 import os
+import errno
 
 import lightning as L
 from lightning.pytorch.callbacks import ModelCheckpoint
@@ -53,6 +54,27 @@ class ModelCheckpointWithSubModules(ModelCheckpoint):
         self.submodule_names = submodule_names
         self.best_model_paths = OrderedDict()
         self.linkpath = linkpath
+    @staticmethod
+    def symlink_force(src, dst, overwrite=True):
+        """
+        Create a symbolic link at the specified destination pointing to the source.
+
+        Parameters:
+        - src: Source path of the target file or directory.
+        - dst: Destination path where the symlink will be created.
+        - overwrite: If True, overwrite the existing symlink or file at the destination.
+
+        Raises:
+        - FileExistsError: If the destination already exists and overwrite is False.
+        - OSError: If the symlink creation fails for other reasons.
+        """
+        if os.path.exists(dst):
+            if overwrite:
+                os.remove(dst)
+            else:
+                raise FileExistsError(f"Destination '{dst}' already exists.")
+        
+        os.symlink(src, dst)
 
     def on_fit_start(self, trainer: "L.Trainer", pl_module: "L.LightningModule") -> None:
         """When pretrain routine starts we build the submodule dir on the fly."""
@@ -69,7 +91,7 @@ class ModelCheckpointWithSubModules(ModelCheckpoint):
     def _save_best_submodules(self, trainer: "L.Trainer"):
         best_model_path = Path(self.best_model_path)
         
-        os.symlink(best_model_path, self.linkpath)
+        self.symlink_force(best_model_path, self.linkpath)
 
         if best_model_path not in self.best_model_paths.keys():
             submodule_subdirpath = Path(self.submodule_dirpath) / best_model_path.stem
@@ -92,3 +114,5 @@ class ModelCheckpointWithSubModules(ModelCheckpoint):
         if len(self.best_model_paths) > self.save_top_k:
             _, least_best_submodel_dir = self.best_model_paths.popitem(last=False)
             trainer.strategy.remove_checkpoint(str(least_best_submodel_dir))
+    
+    

@@ -4,14 +4,14 @@ hia_hou:
   task_name: hia_hou
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/data/ADMET/data_final/data_refined/TDC/hia_hou
+    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/hia_hou
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv
     raw_label_file_names:
       - testset_labels.csv
       - trainset_labels.csv
-    pre_transform:
+    transform:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.RandomWalkGenerator

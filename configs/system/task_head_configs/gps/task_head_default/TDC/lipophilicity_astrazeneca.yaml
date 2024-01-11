@@ -15,4 +15,4 @@ lipophilicity_astrazeneca:
   state_path: null
   post_process:
     _target_: qip.datamodules.transforms.standardizers.RescaleFromStatFile
-    statistics_file: /db2/data/ADMET/data_final/data_refined/TDC/lipophilicity_astrazeneca/raw/stats.pt
+    statistics_file: /db2/users/jungwookim/projects/QIP/datasets/admet_group/lipophilicity_astrazeneca/raw/stats.pt

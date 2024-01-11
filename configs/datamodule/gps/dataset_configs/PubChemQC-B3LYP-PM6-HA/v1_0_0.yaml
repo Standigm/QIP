@@ -17,9 +17,7 @@ pubchemqc-b3lyp-pm6-ha:
         - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
           statistics_file: "/db2/data/ADMET/data_final/data_refined/pm6-HA/raw/stats.pt"
         - _target_: qip.datamodules.transforms.NanToNum
-    pre_transform:
-      _target_: qip.datamodules.transforms.Compose
-      transforms:
+    
         - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]
           space_dim: 0

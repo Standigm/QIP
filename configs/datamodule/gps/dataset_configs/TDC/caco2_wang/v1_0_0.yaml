@@ -4,7 +4,7 @@ caco2_wang:
   task_name: caco2_wang
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/data/ADMET/data_final/data_refined/TDC/caco2_wang
+    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/caco2_wang
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv
@@ -15,10 +15,8 @@ caco2_wang:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
-          statistics_file: /db2/data/ADMET/data_final/data_refined/TDC/caco2_wang/raw/stats.pt
-    pre_transform:
-      _target_: qip.datamodules.transforms.Compose
-      transforms:
+          statistics_file: /db2/users/jungwookim/projects/QIP/datasets/admet_group/caco2_wang/raw/stats.pt
+    
         - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]
           space_dim: 0

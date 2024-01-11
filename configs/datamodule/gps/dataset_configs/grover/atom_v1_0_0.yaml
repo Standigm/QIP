@@ -11,7 +11,7 @@ grover-atom:
     raw_label_file_names:
       - tdc_atom.csv
       - pm6_atom.csv
-    pre_transform:
+    transform:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.RandomWalkGenerator

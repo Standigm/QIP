@@ -4,7 +4,7 @@ clearance_hepatocyte_az:
   task_name: clearance_hepatocyte_az
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/data/ADMET/data_final/data_refined/TDC/clearance_hepatocyte_az
+    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/clearance_hepatocyte_az
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv
@@ -15,10 +15,8 @@ clearance_hepatocyte_az:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
-          statistics_file: /db2/data/ADMET/data_final/data_refined/TDC/clearance_hepatocyte_az/raw/stats.pt
-    pre_transform:
-      _target_: qip.datamodules.transforms.Compose
-      transforms:
+          statistics_file: /db2/users/jungwookim/projects/QIP/datasets/admet_group/clearance_hepatocyte_az/raw/stats.pt
+    
         - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]
           space_dim: 0

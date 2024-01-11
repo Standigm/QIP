@@ -24,6 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/SpearmanCorrCoef/vdss_lombardo.vdss_lombardo
     mode: max
+    linkpath: ${model_dir}/finetuning/vdss_lombardo_weight
 trainer:
   devices: 1
   max_epochs: 5
@@ -38,7 +39,7 @@ datamodule:
 name: gps_PTNAME_finetuning_vdss_lombardo
 seed: 8282
 system:
-  checkpoint_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT0/2023-07-24/12-25-37/checkpoints/checkpoint_000002820.ckpt
+  checkpoint_path: ${model_dir}/multitask_weight
   
   frozen_modules:
     - encoder
