@@ -4,7 +4,7 @@ defaults:
   - /system: encoder_train.yaml
   # override
   # system config
-  - /system/encoder_config: "gps/gnn_gine.yaml"
+  - /system/encoder_config: "gps/medium.yaml"
   - /system/task_head_configs: gps/task_head_default/TDC/caco2_wang.yaml
   - /system/optimizer_configs: paper_finetuning.yaml
   # train config
@@ -24,6 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/MeanAbsoluteError/caco2_wang.caco2_wang
     mode: min
+    linkpath: ${model_dir}/finetuning/caco2_wang_weight
 trainer:
   devices: 1
   max_epochs: 5
@@ -38,7 +39,7 @@ datamodule:
 name: gps_PTNAME_finetuning_caco2_wang
 seed: 8282
 system:
-  checkpoint_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT_HD_2/2023-08-10/10-04-18/checkpoints/checkpoint_000003976.ckpt
+  checkpoint_path: ${model_dir}/multitask_weight
   
   frozen_modules:
     - encoder

@@ -4,8 +4,8 @@ defaults:
   - /system: encoder_train.yaml
   # override
   # system config
-  - /system/encoder_config: "gps/gnn.yaml"
-  - /system/task_head_configs: gps/task_head_default/TDC/half_life_obach.yaml
+  - /system/encoder_config: "gps/medium.yaml"
+  - /system/task_head_configs: gps/task_head_default/TDC/ppbr_az.yaml
   - /system/optimizer_configs: paper_finetuning.yaml
   # train config
   - override /trainer:
@@ -18,12 +18,13 @@ defaults:
       ]
 
   - override /callbacks: default.yaml
-  - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/half_life_obach/v1_0_0]
+  - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/ppbr_az/v1_0_0]
   - override /logger: ["csv"]
 callbacks:
   model_checkpoint:
-    monitor: val/SpearmanCorrCoef/half_life_obach.half_life_obach
-    mode: max
+    monitor: val/MeanAbsoluteError/ppbr_az.ppbr_az
+    mode: min
+    linkpath: ${model_dir}/finetuning/ppbr_az_weight
 trainer:
   devices: 1
   max_epochs: 5
@@ -35,10 +36,10 @@ datamodule:
   batch_size: 16
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
-name: gps_PTNAME_finetuning_half_life_obach
+name: gps_PTNAME_finetuning_ppbr_az
 seed: 8282
 system:
-  checkpoint_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT0/2023-07-24/12-25-37/checkpoints/checkpoint_000002820.ckpt
+  checkpoint_path: ${model_dir}/multitask_weight
   
   frozen_modules:
     - encoder
@@ -47,6 +48,6 @@ system:
 
 
   task_head_configs:
-    half_life_obach:
+    ppbr_az:
       weight: 1
 
