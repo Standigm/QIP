@@ -4,8 +4,8 @@ defaults:
   - /system: encoder_train.yaml
   # override
   # system config
-  - /system/encoder_config: "gps/gnn.yaml"
-  - /system/task_head_configs: gps/task_head_default/TDC/pgp_broccatelli.yaml
+  - /system/encoder_config: "gps/medium.yaml"
+  - /system/task_head_configs: gps/task_head_default/TDC/cyp3a4_substrate_carbonmangels.yaml
   - /system/optimizer_configs: paper_finetuning.yaml
   # train config
   - override /trainer:
@@ -18,12 +18,13 @@ defaults:
       ]
 
   - override /callbacks: default.yaml
-  - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/pgp_broccatelli/v1_0_0]
+  - override /datamodule: [gps/multidata_default.yaml, gps/dataset_configs/TDC/cyp3a4_substrate_carbonmangels/v1_0_0]
   - override /logger: ["csv"]
 callbacks:
   model_checkpoint:
-    monitor: val/BinaryAUROC/pgp_broccatelli.pgp_broccatelli
+    monitor: val/BinaryAUROC/cyp3a4_substrate_carbonmangels.cyp3a4_substrate_carbonmangels
     mode: max
+    linkpath: ${model_dir}/finetuning/cyp3a4_substrate_carbonmangels_weight
 trainer:
   devices: 1
   max_epochs: 5
@@ -35,11 +36,11 @@ datamodule:
   batch_size: 16
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
-name: gps_PTNAME_finetuning_pgp_broccatelli
+name: gps_PTNAME_finetuning_cyp3a4_substrate_carbonmangels
 seed: 8282
 system:
-  checkpoint_path: /db2/users/jungwookim/projects/admet_prediction/outputs/train/runs/gps_MT0/2023-07-24/12-25-37/checkpoints/checkpoint_000002820.ckpt
-  
+  checkpoint_path: ${model_dir}/multitask_weight
+
   frozen_modules:
     - encoder
 
@@ -47,6 +48,6 @@ system:
 
 
   task_head_configs:
-    pgp_broccatelli:
+    cyp3a4_substrate_carbonmangels:
       weight: 1
 
