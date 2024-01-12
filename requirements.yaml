@@ -35,6 +35,7 @@ dependencies:
       - rich
       - libauc==1.2.0
       - ogb
+      - torch-scatter
       - python-dotenv
       - wandb
       - pre-commit
