@@ -121,7 +121,7 @@ class MultiDataModule(L.LightningDataModule):
         dataloaders = OrderedDict()
         for dataset_name in self.dataset_dict.keys():
             if split in ("train", "val", "test"):
-                # TODO: separate get_idx_split from dataset method
+                
                 split_idx = self._datasets[dataset_name].get_idx_split(
                     self.split_dict_names[dataset_name], split_val=self.split_vals[dataset_name]
                 )[split]
