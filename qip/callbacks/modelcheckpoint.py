@@ -54,6 +54,7 @@ class ModelCheckpointWithSubModules(ModelCheckpoint):
         self.submodule_names = submodule_names
         self.best_model_paths = OrderedDict()
         self.linkpath = linkpath
+        
     @staticmethod
     def symlink_force(src, dst, overwrite=True):
         """
