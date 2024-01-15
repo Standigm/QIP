@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/MeanAbsoluteError/solubility_aqsoldb.solubility_aqsoldb
     mode: min
-    linkpath: ${model_dir}/finetuning/solubility_aqsoldb_weight
+    linkpath: ${model_dir}/solubility_aqsoldb_weight
 trainer:
   devices: 1
   max_epochs: 5

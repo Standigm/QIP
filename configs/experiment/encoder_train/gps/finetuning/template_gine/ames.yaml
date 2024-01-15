@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/BinaryAUROC/ames.ames
     mode: max
-    linkpath: ${model_dir}/finetuning/ames_weight
+    linkpath: ${model_dir}/ames_weight
     
 trainer:
   devices: 1

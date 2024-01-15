@@ -1,0 +1,4 @@
+saved_model/multitask_weight_HAD.ckpt filter=lfs diff=lfs merge=lfs -text
+saved_model/*.ptj filter=lfs diff=lfs merge=lfs -text
+saved_model/pretrained_weight_HAD.pt filter=lfs diff=lfs merge=lfs -text
+saved_model/bbb_martins.ckpt filter=lfs diff=lfs merge=lfs -text

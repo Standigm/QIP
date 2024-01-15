@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/BinaryAUROC/dili.dili
     mode: max
-    linkpath: ${model_dir}/finetuning/dili_weight
+    linkpath: ${model_dir}/dili_weight
 trainer:
   devices: 1
   max_epochs: 5

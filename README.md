@@ -11,6 +11,12 @@ pip install -e .
 # How to run
 Configuration is implemented depending on omegaconf and hydra package. 
 You can refer to the contents of the corresponding package for instructions on how to use it.
+# Download pretrained weight
+```
+https://shorturl.at/bJQWY
+
+create saved_model directory and put weights into the saved_model directory.
+```
 
 ## train process
 You can execute specific configuration through experiment argument.
