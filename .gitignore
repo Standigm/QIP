@@ -195,6 +195,4 @@ outputs/*
 # logs
 logs/
 
-# models
-saved_model/*
 >>>>>>> 9e52545 (refactoring)

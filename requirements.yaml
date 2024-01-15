@@ -1,49 +1,21 @@
 name: qip
 channels:
-  - openeye
-  - rdkit
   - nvidia
-  - conda-forge
   - pytorch
   - pyg
+  - conda-forge
 dependencies:
-  - python~=3.10
-  - lightning~=2.0.1
-  - hydra-core==1.3.1
-  - pytorch~=2.0.0
-  - openeye-toolkits
-  - torchvision
-  - torchaudio
-  - pytorch-cuda==11.7
-  - scikit-learn
-  - numpy
-  - scipy
-  - jupyter
-  - ipython
+  - python=3.10
+  - pytorch::pytorch>=2
+  - pytorch::torchvision
+  - pytorch::torchaudio
+  - pytorch::pytorch-cuda==11.8
+  - pyg::pyg
+  - pyg::pytorch-scatter
+  - lightning
+  - hydra-core
+  - hydra-colorlog
+  - python-dotenv
   - rdkit
-  - pandas
-  - seaborn
-  - matplotlib
-  - tqdm
-  - pytorch_scatter
-  - pyg
-  - pylint
-  - autopep8
-  - pip
-  - pip:
-      - hydra-colorlog
-      - hydra-optuna-sweeper
-      - rich
-      - libauc==1.2.0
-      - ogb
-      - python-dotenv
-      - wandb
-      - pre-commit
-      - isort
-      - black
-      - pytest
-      - transformers~=4.27.4
-      - torchmetrics
-      - loguru
-      - boto3
-      - PyTDC
+  - rich
+  - pytdc
