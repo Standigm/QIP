@@ -10,7 +10,7 @@ from torch_geometric.typing import OptTensor
 from rdkit.Chem.rdchem import Mol as rdMol
 from rdkit.Chem.rdchem import Atom as rdAtom
 from rdkit.Chem.rdchem import Bond as rdBond
-from openeye.oechem import OEAtomBase, OEBondBase, OEMolBase
+
 
 # containers
 from qip.typing.outputs import EncoderTaskOutput
@@ -22,9 +22,9 @@ from torchmetrics.classification import BinaryAveragePrecision, MulticlassAUROC,
 PATH = Union[str, Path]
 DATATYPE = Union[Tensor, int, str, float, Data, Batch]
 DATACOLLECTIONS = Union[DATATYPE, Sequence[DATATYPE], Mapping[str, DATATYPE]]
-MOLTYPE = Union[rdMol, OEMolBase]
-ATOMTYPE = Union[rdAtom, OEAtomBase]
-BONDTYPE = Union[rdBond, OEBondBase]
+MOLTYPE = rdMol
+ATOMTYPE = rdAtom
+BONDTYPE = rdBond
 MOLCOLLECTIONS = Union[MOLTYPE, Sequence[MOLTYPE], Mapping[str, MOLTYPE]]
 
 LONGTARGETMETRICS = Union[MulticlassAUROC, BinaryAveragePrecision, MulticlassAccuracy, MulticlassAveragePrecision]
