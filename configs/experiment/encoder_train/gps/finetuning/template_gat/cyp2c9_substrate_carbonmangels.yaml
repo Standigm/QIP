@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/BinaryAveragePrecision/cyp2c9_substrate_carbonmangels.cyp2c9_substrate_carbonmangels
     mode: max
-    linkpath: ${model_dir}/finetuning/cyp2c9_substrate_carbonmangels_weight
+    linkpath: ${model_dir}/cyp2c9_substrate_carbonmangels_weight
 trainer:
   devices: 1
   max_epochs: 5

@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/MeanAbsoluteError/caco2_wang.caco2_wang
     mode: min
-    linkpath: ${model_dir}/finetuning/caco2_wang_weight
+    linkpath: ${model_dir}/caco2_wang_weight
 trainer:
   devices: 1
   max_epochs: 5

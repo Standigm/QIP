@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/MeanAbsoluteError/ppbr_az.ppbr_az
     mode: min
-    linkpath: ${model_dir}/finetuning/ppbr_az_weight
+    linkpath: ${model_dir}/ppbr_az_weight
 trainer:
   devices: 1
   max_epochs: 5

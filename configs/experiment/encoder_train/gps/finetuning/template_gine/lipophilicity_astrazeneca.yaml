@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/MeanAbsoluteError/lipophilicity_astrazeneca.lipophilicity_astrazeneca
     mode: min
-    linkpath: ${model_dir}/finetuning/lipophilicity_astrazeneca_weight
+    linkpath: ${model_dir}/lipophilicity_astrazeneca_weight
 trainer:
   devices: 1
   max_epochs: 5

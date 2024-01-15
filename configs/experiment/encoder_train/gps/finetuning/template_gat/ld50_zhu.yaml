@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/MeanAbsoluteError/ld50_zhu.ld50_zhu
     mode: min
-    linkpath: ${model_dir}/finetuning/ld50_zhu_weight
+    linkpath: ${model_dir}/ld50_zhu_weight
 trainer:
   devices: 1
   max_epochs: 5

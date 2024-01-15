@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/SpearmanCorrCoef/vdss_lombardo.vdss_lombardo
     mode: max
-    linkpath: ${model_dir}/finetuning/vdss_lombardo_weight
+    linkpath: ${model_dir}/vdss_lombardo_weight
 trainer:
   devices: 1
   max_epochs: 5

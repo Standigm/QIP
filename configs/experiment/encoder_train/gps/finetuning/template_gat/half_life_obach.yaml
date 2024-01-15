@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/SpearmanCorrCoef/half_life_obach.half_life_obach
     mode: max
-    linkpath: ${model_dir}/finetuning/half_life_obach_weight
+    linkpath: ${model_dir}/half_life_obach_weight
 trainer:
   devices: 1
   max_epochs: 5

@@ -23,7 +23,7 @@ defaults:
 callbacks:
   model_checkpoint:
     monitor: val/BinaryAveragePrecision/cyp2c9_veith.cyp2c9_veith
-    mode: malinkpath: ${model_dir}/finetuning/cyp2c9_veith_weight
+    mode: malinkpath: ${model_dir}/cyp2c9_veith_weight
     
 trainer:
   devices: 1

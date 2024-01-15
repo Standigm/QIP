@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/SpearmanCorrCoef/clearance_microsome_az.clearance_microsome_az
     mode: max
-    linkpath: ${model_dir}/finetuning/clearance_microsome_az_weight
+    linkpath: ${model_dir}/clearance_microsome_az_weight
 trainer:
   devices: 1
   max_epochs: 5

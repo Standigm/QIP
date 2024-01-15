@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/BinaryAveragePrecision/cyp2d6_veith.cyp2d6_veith
     mode: max
-    linkpath: ${model_dir}/finetuning/cyp2d6_veith_weight
+    linkpath: ${model_dir}/cyp2d6_veith_weight
 trainer:
   devices: 1
   max_epochs: 5

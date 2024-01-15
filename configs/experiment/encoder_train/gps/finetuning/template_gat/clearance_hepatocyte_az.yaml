@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/SpearmanCorrCoef/clearance_hepatocyte_az.clearance_hepatocyte_az
     mode: max
-    linkpath: ${model_dir}/finetuning/clearance_hepatocyte_az
+    linkpath: ${model_dir}/clearance_hepatocyte_az
 trainer:
   devices: 1
   max_epochs: 5

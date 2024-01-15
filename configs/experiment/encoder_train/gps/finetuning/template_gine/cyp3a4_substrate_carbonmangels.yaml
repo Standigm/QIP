@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/BinaryAUROC/cyp3a4_substrate_carbonmangels.cyp3a4_substrate_carbonmangels
     mode: max
-    linkpath: ${model_dir}/finetuning/cyp3a4_substrate_carbonmangels_weight
+    linkpath: ${model_dir}/cyp3a4_substrate_carbonmangels_weight
 trainer:
   devices: 1
   max_epochs: 5

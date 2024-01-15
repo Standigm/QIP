@@ -24,7 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/BinaryAUROC/pgp_broccatelli.pgp_broccatelli
     mode: max
-    linkpath: ${model_dir}/finetuning/pgp_broccatelli_weight
+    linkpath: ${model_dir}/pgp_broccatelli_weight
 trainer:
   devices: 1
   max_epochs: 5
