@@ -48,5 +48,3 @@ you can change specific argument by passing <arg_name>=<value>
 ```bash
 python run.py experiment=<your_config_to_run> datamodule.batch_size=4 callbacks=early_stopping
 ```
-HYDRA_FULL_ERROR=1 /db2/slurm_script/submit_job -N 1 -G 1 -C 32 -T dgx env MASTER_PORT=45100 /db2/users/hyunjunji/conda/envs/qip/bin/python run.py experiment=encoder_train/gps/finetuning/template/ames.yaml seed=8252 name=qipinferenc trainer.devices=1
-/db2/users/hyunjunji/conda/envs/qip/bin/python
