@@ -15,7 +15,7 @@ clearance_microsome_az:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
-          statistics_file: ${data_dir}/admet_group/clearance_microsome_az/stats.pt
+          statistics_file: ${data_dir}/admet_group/clearance_microsome_az/raw/stats.pt
     
         - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]

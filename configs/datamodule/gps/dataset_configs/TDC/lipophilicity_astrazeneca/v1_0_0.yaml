@@ -15,7 +15,7 @@ lipophilicity_astrazeneca:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
-          statistics_file: ${data_dir}/admet_group/lipophilicity_astrazeneca/stats.pt
+          statistics_file: ${data_dir}/admet_group/lipophilicity_astrazeneca/raw/stats.pt
         - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]
           space_dim: 0
