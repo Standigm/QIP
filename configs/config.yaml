@@ -22,7 +22,7 @@ curr_dir: ${hydra:runtime.cwd}
 work_dir: ${hydra:runtime.output_dir}
 
 # path to folder with data
-data_dir: ${curr_dir}/data/
+data_dir: ${curr_dir}/datasets
 
 # path to folder with saved_model
 model_dir: ${curr_dir}/saved_model
