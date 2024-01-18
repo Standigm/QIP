@@ -15,7 +15,7 @@ vdss_lombardo:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
-          statistics_file: /db2/users/jungwookim/projects/QIP/datasets/admet_group/vdss_lombardo/raw/stats.pt
+          statistics_file: ${data_dir}/admet_group/vdss_lombardo/stats.pt
     
         - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]

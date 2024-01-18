@@ -15,7 +15,7 @@ caco2_wang:
       _target_: qip.datamodules.transforms.Compose
       transforms:
         - _target_: qip.datamodules.transforms.standardizers.StandardizerFromStatFile
-          statistics_file: /db2/users/jungwookim/projects/QIP/datasets/admet_group/caco2_wang/raw/stats.pt
+          statistics_file: ${data_dir}/admet_group/caco2_wang/stats.pt
     
         - _target_: qip.datamodules.transforms.RandomWalkGenerator
           ksteps: [1,17]
