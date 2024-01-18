@@ -24,6 +24,7 @@ callbacks:
   model_checkpoint:
     monitor: val/BinaryAUROC/bioavailability_ma.bioavailability_ma
     mode: max
+    linkpath: ${model_dir}/bioavailability_ma_weight
 trainer:
   devices: 1
   max_epochs: 5
