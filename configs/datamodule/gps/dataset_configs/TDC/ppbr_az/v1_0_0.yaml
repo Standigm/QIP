@@ -4,7 +4,7 @@ ppbr_az:
   task_name: ppbr_az
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/ppbr_az
+    root: ${data_dir}/admet_group/ppbr_az
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv

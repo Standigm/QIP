@@ -4,7 +4,7 @@ pgp_broccatelli:
   task_name: pgp_broccatelli
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/pgp_broccatelli
+    root: ${data_dir}/admet_group/pgp_broccatelli
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv

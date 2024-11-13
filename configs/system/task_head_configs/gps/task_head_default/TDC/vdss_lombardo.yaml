@@ -13,6 +13,6 @@ vdss_lombardo:
     - _target_: torchmetrics.SpearmanCorrCoef
       num_outputs: 1
   state_path: null
-  # post_process:
-  #   _target_: qip.datamodules.transforms.standardizers.RescaleFromStatFile
-  #   statistics_file: /db2/users/jungwookim/projects/QIP/datasets/admet_group/vdss_lombardo/raw/stats.pt
+  post_process:
+    _target_: qip.datamodules.transforms.standardizers.RescaleFromStatFile
+    statistics_file: ${data_dir}/admet_group/vdss_lombardo/raw/stats.pt

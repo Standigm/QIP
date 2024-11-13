@@ -15,4 +15,4 @@ half_life_obach:
   state_path: null
   post_process:
     _target_: qip.datamodules.transforms.standardizers.RescaleFromStatFile
-    statistics_file: /db2/users/jungwookim/projects/QIP/datasets/admet_group/half_life_obach/raw/stats.pt
+    statistics_file: ${data_dir}/admet_group/half_life_obach/raw/stats.pt

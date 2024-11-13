@@ -4,7 +4,7 @@ half_life_obach:
   task_name: half_life_obach
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/half_life_obach
+    root: ${data_dir}/admet_group/half_life_obach
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv

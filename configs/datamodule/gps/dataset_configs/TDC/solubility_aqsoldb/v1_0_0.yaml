@@ -4,7 +4,7 @@ solubility_aqsoldb:
   task_name: solubility_aqsoldb
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/solubility_aqsoldb
+    root: ${data_dir}/admet_group/solubility_aqsoldb
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv
