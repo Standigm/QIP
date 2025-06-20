@@ -1,18 +1,19 @@
 name: qip
 channels:
-  - nvidia
   - pytorch
+  - nvidia
   - pyg
   - conda-forge
 dependencies:
   - python=3.10
-  - pytorch::pytorch>=2
+  # - pytorch::pytorch
   - pytorch::torchvision
   - pytorch::torchaudio
-  - pytorch::pytorch-cuda==11.8
+  - pytorch::pytorch-cuda
+  # - cudatoolkit=11.8
+  - lightning
   - pyg::pyg
   - pyg::pytorch-scatter
-  - lightning
   - hydra-core
   - hydra-colorlog
   - python-dotenv
