@@ -4,7 +4,7 @@ bbb_martins:
   task_name: bbb_martins
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/bbb_martins
+    root: ${data_dir}/admet_group/bbb_martins
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv

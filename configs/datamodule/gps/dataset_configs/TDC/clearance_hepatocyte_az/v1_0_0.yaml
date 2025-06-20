@@ -4,7 +4,7 @@ clearance_hepatocyte_az:
   task_name: clearance_hepatocyte_az
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/clearance_hepatocyte_az
+    root: ${data_dir}/admet_group/clearance_hepatocyte_az
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv

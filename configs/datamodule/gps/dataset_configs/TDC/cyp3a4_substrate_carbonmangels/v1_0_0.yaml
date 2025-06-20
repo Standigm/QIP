@@ -4,7 +4,7 @@ cyp3a4_substrate_carbonmangels:
   task_name: cyp3a4_substrate_carbonmangels
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/cyp3a4_substrate_carbonmangels
+    root: ${data_dir}/admet_group/cyp3a4_substrate_carbonmangels
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv

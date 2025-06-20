@@ -24,7 +24,9 @@ https://zenodo.org/records/15703563
 Create saved_model directory and put weights into the saved_model directory.
 
 ## Model training
+
 You can execute specific configuration through experiment argument.
+
 ```bash
 # bash
 bash workflow.sh
@@ -38,8 +40,8 @@ python preprocessing.py
 python run.py experiment=encoder_train/gps/multitask/gps_MTHAD.yaml seed=8272
 
 # finetuning
-python run.py experiment=encoder_train/gps/finetuning/template/ames.yaml seed=8272 
-## example 
+python run.py experiment=encoder_train/gps/finetuning/template/ames.yaml seed=8272
+## example
 python run.py experiment=encoder_train/gps/finetuning/template/ames.yaml seed=8272 system.checkpoint_path=${model_dir}/multitask_weight_HAD.ckpt
 
 # If you wanna print full error log, use HYDRA_FULL_ERROR=1 option
@@ -48,11 +50,12 @@ HYDRA_FULL_ERROR=1 python run.py experiment=encoder_train/gps/finetuning/templat
 python run.py experiment=encoder_train/gps/inference/inference_test.yaml seed=8272
 ```
 
-
 you can change specific argument by passing <arg_name>=<value>
+
 ```bash
 python run.py experiment=<your_config_to_run> datamodule.batch_size=4 callbacks=early_stopping
 ```
+
 HYDRA_FULL_ERROR=1 /db2/slurm_script/submit_job -N 1 -G 1 -C 32 -T dgx env MASTER_PORT=45100 /db2/users/hyunjunji/conda/envs/qip/bin/python run.py experiment=encoder_train/gps/finetuning/template/ames.yaml seed=8252 name=qipinferenc trainer.devices=1
 /db2/users/hyunjunji/conda/envs/qip/bin/python
 
@@ -79,3 +82,4 @@ options:
   --task_head_config TASK_HEAD_CONFIG
                         Path to task head config (default: configs/system/task_head_configs/gps/MT0.yaml)
 ```
+

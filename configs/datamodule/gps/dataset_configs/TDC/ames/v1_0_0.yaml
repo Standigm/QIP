@@ -4,7 +4,7 @@ ames:
   task_name: ames
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/ames
+    root: ${data_dir}/admet_group/ames
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv

@@ -4,7 +4,7 @@ vdss_lombardo:
   task_name: vdss_lombardo
   dataset:
     _target_: qip.datamodules.datasets.MoleculeGraphFromSMILESDataset
-    root: /db2/users/jungwookim/projects/QIP/datasets/admet_group/vdss_lombardo
+    root: ${data_dir}/admet_group/vdss_lombardo
     raw_file_names:
       - testset_smiles.csv
       - trainset_smiles.csv
