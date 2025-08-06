@@ -59,7 +59,7 @@ def _smiles_list_to_dataloader(smiles_list: list[str], batch_size: int = 2) -> D
 
 
 def load_model_components(
-    ckpt_path: Path, encoder_config_path: Path, task_head_config_path: Path
+    ckpt_path: Path, encoder_config_path: Path, task_head_config_path: Path, device: torch.device
 ) -> tuple[nn.Module, dict[str, nn.Module], dict[str, Callable | None]]:
     ckpt = torch.load(ckpt_path)
     encoder_config = OmegaConf.load(encoder_config_path)
@@ -72,6 +72,10 @@ def load_model_components(
     encoder.eval()
     encoder.to(device)
 
+    # Set data_dir for config resolution
+    current_dir = Path.cwd()
+    data_dir = current_dir / "datasets"
+    
     multitask_config_path = task_head_config_path
     task_head_path = multitask_config_path.parent.parent
     task_head_configs = OmegaConf.load(task_head_config_path)
@@ -84,7 +88,11 @@ def load_model_components(
         task_name = list(task_head_config.keys())[0]
         task_head_config[task_name]["module"]["in_features"] = encoder_config["module"]["d_model"]
 
-        task_head_instance = hydra.utils.instantiate(task_head_config)[task_name]
+        # Resolve data_dir interpolation before instantiation
+        OmegaConf.set_struct(task_head_config, False)
+        resolved_config = OmegaConf.create(OmegaConf.to_yaml(task_head_config).replace("${data_dir}", str(data_dir)))
+        
+        task_head_instance = hydra.utils.instantiate(resolved_config)[task_name]
 
         task_head = task_head_instance["module"]
         task_head_dict = {}
@@ -110,7 +118,7 @@ def main(
     device: torch.device = torch.device("cuda"),
 ) -> pd.DataFrame:
     encoder, task_heads, task_head_post_processes = load_model_components(
-        ckpt_path, encoder_config_path, task_head_config_path
+        ckpt_path, encoder_config_path, task_head_config_path, device
     )
     inference_module = InferenceModule(encoder, task_heads, task_head_post_processes, device)
 
